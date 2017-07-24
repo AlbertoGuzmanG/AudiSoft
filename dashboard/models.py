@@ -12,6 +12,9 @@ class BaseModel(models.Model):
 class Indicator(BaseModel):
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 class IndicatorData(BaseModel):
     load_date = models.DateField(max_length=50)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -20,9 +23,15 @@ class IndicatorType(BaseModel):
     name = models.CharField(max_length=50)
     key = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 class Region(BaseModel):
     name = models.CharField(max_length=50)
     map_id = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
 
 class Office(BaseModel):
     name = models.CharField(max_length=50)
@@ -31,3 +40,6 @@ class Office(BaseModel):
     code = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
     region_map = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
