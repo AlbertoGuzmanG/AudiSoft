@@ -15,7 +15,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
     <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
-    <title>AudISoft</title>
+    <title>AudISoft  {% block title%} Dashboard {%endblock%}</title>
 
     <!-- Favicons-->
     <link rel="icon" href="/static/images/favicon/favicon-32x32.png" sizes="32x32">
@@ -41,6 +41,7 @@
     <link href="/static/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="/static/js/plugins/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="/static/js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="/static/js/plugins/jvectormap/style.css" type="text/css" rel="stylesheet" media="screen,projection">
 
     {% block styles%}
     {% endblock %}
@@ -48,7 +49,7 @@
 
 </head>
 
-<body>
+<body ng-app='audit_soft'>
     <!-- Start Page Loading -->
     <div id="loader-wrapper">
         <div id="loader"></div>
@@ -556,22 +557,6 @@
 
     <!-- START FOOTER -->
     <footer class="page-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">World Market</h5>
-                    <p class="grey-text text-lighten-4">World map, world regions, countries and cities.</p>
-                    <div id="world-map-markers"></div>
-                </div>
-                <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Sales by Country</h5>
-                    <p class="grey-text text-lighten-4">A sample polar chart to show sales by country.</p>
-                    <div id="polar-chart-holder">
-                        <canvas id="polar-chart-country" width="200"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="footer-copyright">
             <div class="container">
                 Copyright © 2015 <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">GeeksLabs</a> All rights reserved.
@@ -612,6 +597,14 @@
     <script type="text/javascript" src="/static/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
     <script type="text/javascript" src="/static/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
     <script type="text/javascript" src="/static/js/plugins/jvectormap/vectormap-script.js"></script>
+
+
+    <script type="text/javascript" src="/static/js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/static/js/jvectormap/ol.js"></script>
+    <script type="text/javascript" src="/static/js/jvectormap/ol3-layerswitcher.js"></script>
+    <script type="text/javascript" src="/static/js/modules/main.js"></script>
+
+
 
 
     <!--plugins.js - Some Specific JS codes for Plugin Settings-->

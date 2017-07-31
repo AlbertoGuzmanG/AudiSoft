@@ -251,12 +251,55 @@ var polarData = [
 			color: "#4caf50",
 			highlight: "#81c784",
 			label: "Germany"
+		},
+		{
+			value: 5000,
+			color: "#00acc1",
+			highlight: "#4dd0e1",
+			label: "China"
+		},
+		{
+			value: 3500,
+			color: "#4caf50",
+			highlight: "#81c784",
+			label: "Germany"
+		},
+		{
+			value: 5000,
+			color: "#00acc1",
+			highlight: "#4dd0e1",
+			label: "China"
+		},
+		{
+			value: 3500,
+			color: "#4caf50",
+			highlight: "#81c784",
+			label: "Germany"
+		},
+		{
+			value: 3500,
+			color: "#4caf50",
+			highlight: "#81c784",
+			label: "Germany"
 		}
 
 
 
 	];	
 		
+
+var polarData = [{value:1, label:	'METROPOLITANA NORTE', color:"#f44336", highlight: "#FF5A5E"},
+{value:50, label:	'METROPOLITANA CENTRAL', color: "#9c27b0", highlight: "#ce93d8"},
+{value:40, label:	'METROPOLITANA OESTE', color: "#3f51b5", highlight: "#7986cb"},
+{value:10, label:	'METROPOLITANA ORIENTAL', color: "#2196f3 ", highlight: "#90caf9"},    
+{value:20, label:	'ZONA ESTE', color: "#ff9800", highlight: "#ffb74d"},
+{value:8, label:	'ZONA SANTIAGO ESTE', color: "#009688", highlight: "#80cbc4"},   
+{value:40, label:	'ZONA SANTIAGO OESTE', color: "#00acc1", highlight: "#4dd0e1"},   
+{value:60, label:	'ZONA NORCENTRAL', color: "#4caf50", highlight: "#81c784"},  
+{value:10, label:	'ZONA NORDESTE', color: "#00acc1", highlight: "#4dd0e1"},  
+{value:10, label:	'ZONA NOROESTE', color: "#4caf50", highlight: "#81c784"},  
+{value:70, label:	'ZONA SURESTE', color: "#00acc1", highlight: "#4dd0e1"},
+{value:90, label:	'ZONA SUROESTE', color: "#4caf50", highlight: "#81c784"}];
 
 
 
@@ -348,10 +391,5 @@ window.onload = function(){
 			responsive: true,			
 		});
 
-		var polarChartCountry = document.getElementById("polar-chart-country").getContext("2d");
-		window.polarChartCountry = new Chart(polarChartCountry).PolarArea(polarData, {
-			segmentStrokeWidth : 1,			
-			responsive:true
-		});
 
 };
