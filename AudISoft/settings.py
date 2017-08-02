@@ -73,10 +73,11 @@ WSGI_APPLICATION = 'AudISoft.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+        # 'ENGINE': 'django.db.backends.mysql',
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.contrib.gis.db.backends.mysql',
         'HOST': 'localhost',
         'USER' : 'root',
         'NAME' : 'audisoft'

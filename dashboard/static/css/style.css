@@ -8,7 +8,7 @@
 
 ------------------------------------------*/
 /*=================================================================================
-    General
+	General
 ====================================================================================*/
 /*----------------------------------------
   General Layout Style
@@ -47,25 +47,25 @@ footer {
 }
 @media only screen and (min-width: 601px) {
   .container {
-    width: 98%;
+	width: 98%;
   }
 }
 @media only screen and (min-width: 993px) {
   .container {
-    width: 98%;
+	width: 98%;
   }
 }
 @media only screen and (max-width: 993px) {
   #main,
   footer {
-    padding-left: 0px;
+	padding-left: 0px;
   }
 }
 .ps-scrollbar-x-rail,.ps-scrollbar-y-rail{
   z-index: 9999;
 }
 /*---------------------------------
-    Typography
+	Typography
 -----------------------------------*/
 
 .small {
@@ -129,7 +129,7 @@ li.li-hover:hover{
   margin: 0 !important;
 }
 /*----------------------------------------
-    Pre Loader
+	Pre Loader
 ------------------------------------------*/
 #loader-wrapper {
   position: fixed;
@@ -200,46 +200,46 @@ li.li-hover:hover{
 }
 @-webkit-keyframes spin {
   0% {
-    -webkit-transform: rotate(0deg);
-    /* Chrome, Opera 15+, Safari 3.1+ */
-    
-    -ms-transform: rotate(0deg);
-    /* IE 9 */
-    
-    transform: rotate(0deg);
-    /* Firefox 16+, IE 10+, Opera */
+	-webkit-transform: rotate(0deg);
+	/* Chrome, Opera 15+, Safari 3.1+ */
+	
+	-ms-transform: rotate(0deg);
+	/* IE 9 */
+	
+	transform: rotate(0deg);
+	/* Firefox 16+, IE 10+, Opera */
   }
   100% {
-    -webkit-transform: rotate(360deg);
-    /* Chrome, Opera 15+, Safari 3.1+ */
-    
-    -ms-transform: rotate(360deg);
-    /* IE 9 */
-    
-    transform: rotate(360deg);
-    /* Firefox 16+, IE 10+, Opera */
+	-webkit-transform: rotate(360deg);
+	/* Chrome, Opera 15+, Safari 3.1+ */
+	
+	-ms-transform: rotate(360deg);
+	/* IE 9 */
+	
+	transform: rotate(360deg);
+	/* Firefox 16+, IE 10+, Opera */
   }
 }
 @keyframes spin {
   0% {
-    -webkit-transform: rotate(0deg);
-    /* Chrome, Opera 15+, Safari 3.1+ */
-    
-    -ms-transform: rotate(0deg);
-    /* IE 9 */
-    
-    transform: rotate(0deg);
-    /* Firefox 16+, IE 10+, Opera */
+	-webkit-transform: rotate(0deg);
+	/* Chrome, Opera 15+, Safari 3.1+ */
+	
+	-ms-transform: rotate(0deg);
+	/* IE 9 */
+	
+	transform: rotate(0deg);
+	/* Firefox 16+, IE 10+, Opera */
   }
   100% {
-    -webkit-transform: rotate(360deg);
-    /* Chrome, Opera 15+, Safari 3.1+ */
-    
-    -ms-transform: rotate(360deg);
-    /* IE 9 */
-    
-    transform: rotate(360deg);
-    /* Firefox 16+, IE 10+, Opera */
+	-webkit-transform: rotate(360deg);
+	/* Chrome, Opera 15+, Safari 3.1+ */
+	
+	-ms-transform: rotate(360deg);
+	/* IE 9 */
+	
+	transform: rotate(360deg);
+	/* Firefox 16+, IE 10+, Opera */
   }
 }
 #loader-wrapper .loader-section {
@@ -317,13 +317,13 @@ li.li-hover:hover{
   display: none;
 }
 .progress{
-    background-color: rgba(255, 64, 129, 0.22);
+	background-color: rgba(255, 64, 129, 0.22);
 }
 /*=================================================================================
-    Header
+	Header
 ====================================================================================*/
 /*----------------------------------------
-    Page Header
+	Page Header
 ------------------------------------------*/
 h1.logo-wrapper{
   margin: 0px 0px;
@@ -346,14 +346,14 @@ header .brand-logo img{
 }
 @media only screen and (max-width: 992px) {
   nav .nav-wrapper {
-    text-align: center;
+	text-align: center;
   }
   nav .nav-wrapper a.page-title {
-    font-size: 36px;
+	font-size: 36px;
   }
 }
 .slider .indicators {
-    z-index: 9999;
+	z-index: 9999;
 }
 /*Search box*/ 
 .header-search-wrapper {  
@@ -422,12 +422,12 @@ input.header-search-input {
 }
 
 input.header-search-input:hover {
-    background: rgba(255,255,255,0.5);
+	background: rgba(255,255,255,0.5);
 }
 
 input.header-search-input:focus {
-    color:#333;
-    background: #fff;
+	color:#333;
+	background: #fff;
 }
 input.header-search-input:focus {
   border-bottom: none !important;
@@ -479,10 +479,10 @@ li.search-out:hover{
 }
 
 /*=================================================================================
-    Sidebar
+	Sidebar
 ====================================================================================*/
 /*----------------------------------------
-    Sidebar Main Menu 
+	Sidebar Main Menu 
 ------------------------------------------*/
 nav ul li.no-hover:hover{
   background: none;
@@ -492,7 +492,7 @@ ul.side-nav.leftside-navigation {
 }
 @media only screen and (max-width: 992px) {
   ul.side-nav.leftside-navigation {
-    top: 56px;
+	top: 56px;
   }
 }
 ul.side-nav.leftside-navigation hr {
@@ -569,10 +569,10 @@ ul.side-nav.leftside-navigation li a {
 }
 .side-nav.leftside-navigation .collapsible-body li.active a,
 .side-nav.fixed.leftside-navigation .collapsible-body li.active a{
-    color: #444;
+	color: #444;
 }
 .side-nav .collapsible-body li a{
-    margin: 0 1rem 0 3rem;
+	margin: 0 1rem 0 3rem;
 }
 ul.side-nav.leftside-navigation ul.collapsible-accordion {
   background-color: #FFF;
@@ -632,7 +632,7 @@ nav.top-nav a.page-title {
 
 
 /*----------------------------------------
-    Right Chat Slideout
+	Right Chat Slideout
 ------------------------------------------*/
 
 .rightside-navigation {
@@ -687,10 +687,10 @@ nav.top-nav a.page-title {
   font-size: 0.8rem;
 }
 /* =================================================================================
-    Content
+	Content
 ================================================================================= */
 /*----------------------------------------
-    Breadcrumb
+	Breadcrumb
 ------------------------------------------*/
 
 .breadcrumb {
@@ -727,7 +727,7 @@ h5.breadcrumbs-header {
   margin: 8px 0 9px 0;
 }
 /*----------------------------------------
-    Cards
+	Cards
 ------------------------------------------*/
 /*card-stats*/
 
@@ -894,7 +894,7 @@ h5.breadcrumbs-header {
   margin-right: 10px !important;
 }
 /*----------------------------------------
-    Charts
+	Charts
 ------------------------------------------*/
 
 #chart-dashboard {
@@ -911,6 +911,13 @@ h5.breadcrumbs-header {
 .sample-chart-wrapper {
   width: 100%;
 }
+.sample-chart-wrapper span {
+	color: #796E6E;
+	text-transform: uppercase;
+	margin-left: 65px;
+	font-size: 15pt;
+}
+
 .chart-title {
   font-size: 1.6rem;
   font-weight: 300;
@@ -1064,7 +1071,7 @@ th {
   padding: 0;
 }
 /*----------------------------------------
-    Calender
+	Calender
 ------------------------------------------*/
 
 #full-calendar {
@@ -1102,7 +1109,7 @@ th {
   color: #ff4081 !important;
 }
 /*----------------------------------------
-    Color Palette for css-color.html page
+	Color Palette for css-color.html page
 ------------------------------------------*/
 
 .dynamic-color .red,
@@ -1140,7 +1147,7 @@ th {
 }
 @media only screen and (max-width: 1024px) {
   tfoot {
-    display: none;
+	display: none;
   }
 }
 tr.group,
@@ -1148,7 +1155,7 @@ tr.group:hover {
   background-color: #ddd !important;
 }
 /*----------------------------------------
-    Grid - Flat Site Mockup
+	Grid - Flat Site Mockup
 ------------------------------------------*/
 
 #site-layout-example-left {
@@ -1204,7 +1211,7 @@ tr.group:hover {
   line-height: 57px;
 }
 /*----------------------------------------
-    Chrome Browser Grid Example
+	Chrome Browser Grid Example
 ------------------------------------------*/
 
 .browser-window {
@@ -1277,7 +1284,7 @@ tr.group:hover {
   margin-bottom: 0px;
 }
 /*----------------------------------------
-    icon page
+	icon page
 ------------------------------------------*/
 
 .icon-demo {
@@ -1304,7 +1311,7 @@ tr.group:hover {
   margin: 0px 0;
 }
 /*----------------------------------------
-    Login Page
+	Login Page
 ------------------------------------------*/
 
 .login-form {
@@ -1325,7 +1332,7 @@ tr.group:hover {
   margin-left: -6px !important;
 }
 /*----------------------------------------
-    Error Page
+	Error Page
 ------------------------------------------*/
 
 .text-long-shadow {
@@ -1339,7 +1346,7 @@ tr.group:hover {
   padding: 20px 0 !important;
 }
 /*----------------------------------------
-    Email Page
+	Email Page
 ------------------------------------------*/
 
 #mail-app hr {
@@ -1526,7 +1533,7 @@ tr.group:hover {
   padding: 24px;
 }
 /*----------------------------------------
-    Invoice Page
+	Invoice Page
 ------------------------------------------*/
 
 .invoice-icon i {
@@ -1540,7 +1547,7 @@ tr.group:hover {
 }
 
 /*----------------------------------------
-    Blog
+	Blog
 ------------------------------------------*/
 
 /* ----- Blog Card -----*/
@@ -1651,7 +1658,7 @@ tr.group:hover {
 
 
 /*----------------------------------------
-    Products
+	Products
 ------------------------------------------*/
 
 /* ---- Product Card ----- */
@@ -1759,7 +1766,7 @@ tr.group:hover {
 
 
 /*----------------------------------------
-    Gallary  Page
+	Gallary  Page
 ------------------------------------------*/
 .gallary-item img { 
   width: 20%;
@@ -1801,13 +1808,13 @@ tr.group:hover {
 
 
 /*----------------------------------------
-    Contact Page (Map-card)
+	Contact Page (Map-card)
 ------------------------------------------*/
 
 /* ---- Map card ----*/
 .map-card #map-canvas {
-    width: 100%;
-    height: 342px;
+	width: 100%;
+	height: 342px;
 }
 .map-card .card .card-content .card-title, .map-card .card .card-reveal .card-title {
   font-size: 1.2rem;
@@ -1815,16 +1822,16 @@ tr.group:hover {
   font-weight: 400;
 }
 .map-card .btn-move-up{
-    top: -38px;
+	top: -38px;
 }
 /* ---- Map Contact Page ----*/
 #map-canvas {
-    width: 100%;
-    height: 250px;
+	width: 100%;
+	height: 250px;
 }
 
 /*----------------------------------------
-    Pricing Plan  Page
+	Pricing Plan  Page
 ------------------------------------------*/
 .plans-container .collection {
   border: none;
@@ -1892,13 +1899,13 @@ tr.group:hover {
 }/*
 @media screen and (min-width: 601px) {
   .plans-container .card {
-    min-height: 550px;
+	min-height: 550px;
   }
 }*/
 
 
 /*----------------------------------------
-    Profile Page
+	Profile Page
 ------------------------------------------*/
 
 #profile-page-header .card-image {
@@ -1962,7 +1969,7 @@ tr.group:hover {
 }
 
 /*----------------------------------------
-    Shadow effect
+	Shadow effect
 ------------------------------------------*/
 
 .shadow-demo {
@@ -1975,14 +1982,14 @@ tr.group:hover {
   font-weight: 500;
 }
 /*=================================================================================
-    Footer
+	Footer
 ====================================================================================*/
 
 footer.page-footer {
   padding-top: 0px;
 }
 /*----------------------------------------
-    footer charts
+	footer charts
 ------------------------------------------*/
 
 #world-map-markers {
@@ -1993,14 +2000,14 @@ footer.page-footer {
 }
 
 /*=================================================================================
-    Media Queries
+	Media Queries
 ====================================================================================*/
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 /* STYLES GO HERE */
   .doughnut-chart-status{
-    display: none;
+	display: none;
   } 
 }
 
@@ -2009,9 +2016,9 @@ footer.page-footer {
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
 /* STYLES GO HERE */
   .doughnut-chart-status{
-    display: none;
+	display: none;
   }
   #card-stats .card-stats-compare{
-      font-size: 0.8rem;
+	  font-size: 0.8rem;
   }
 }

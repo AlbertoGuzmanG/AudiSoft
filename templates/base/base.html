@@ -26,7 +26,6 @@
     <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
     <!-- For Windows Phone -->
 
-
     <!-- CORE CSS-->
     <link href="/static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="/static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
@@ -35,18 +34,16 @@
     <!-- CSS style Horizontal Nav (Layout 03)-->
     <link href="/static/css/style-horizontal.css" type="text/css" rel="stylesheet" media="screen,projection">
 
-
-
     <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
     <link href="/static/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="/static/js/plugins/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="/static/js/plugins/xcharts/xcharts.min.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="/static/js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="/static/js/plugins/jvectormap/style.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="/static/js/plugins/morris-chart/morris.css" type="text/css" rel="stylesheet" media="screen,projection">
 
     {% block styles%}
     {% endblock %}
-
-
 </head>
 
 <body ng-app='audit_soft'>
@@ -69,7 +66,7 @@
 
                     <ul class="left">
                       <li class="no-hover"><a href="/static/index.html#" data-activates="slide-out" class="menu-sidebar-collapse btn-floating btn-flat btn-medium waves-effect waves-light cyan hide-on-large-only"><i class="mdi-navigation-menu" ></i></a></li>
-                      <li><h1 class="logo-wrapper"><a href="/static/index.html" class="brand-logo darken-1"><img src="/static/images/materialize-logo.png" alt="materialize logo"></a> <span class="logo-text">Materialize</span></h1></li>
+                      <li><h1 class="logo-wrapper"><a href="/static/index.html" class="brand-logo darken-1"><img src="/static/images/materialize-logo.png" alt="materialize logo"></a> <span class="logo-text">Ma ssterialize</span></h1></li>
                     </ul>
                     <div class="header-search-wrapper hide-on-med-and-down">
                         <i class="mdi-action-search"></i>
@@ -573,7 +570,9 @@
     <script type="text/javascript" src="/static/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
 
-    <!-- chartist -->
+    <!-- Xchart -->
+    <script type="text/javascript" src="/static/js/plugins/d3/d3.min.js"></script>
+    <script type="text/javascript" src="/static/js/plugins/xcharts/xcharts.min.js"></script>
     <script type="text/javascript" src="/static/js/plugins/chartist-js/chartist.min.js"></script>
 
     <!-- chartjs -->
@@ -599,7 +598,9 @@
     <script type="text/javascript" src="/static/js/modules/main.js"></script>
 
 
-
+    <!-- Morris -->
+    <script src="/static/js/plugins/morris-chart/raphael-min.js"></script>
+    <script src="/static/js/plugins/morris-chart/morris.min.js"></script>
 
     <!--plugins.js - Some Specific JS codes for Plugin Settings-->
     <script type="text/javascript" src="/static/js/plugins.js"></script>
