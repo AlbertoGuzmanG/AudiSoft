@@ -1,20 +1,26 @@
 
 
-            <div class="row map-container">
+            <div class="row map-container" >
                 <div class="col s8 map-container">
 					<div ng-controller="map">
 						<div style="width:100%; margin:auto">
 							<div id="map" style="width:100%; height:530px; padding:2px; margin:auto">
-								
+							    <div id="popup" class="ol-popup">
+							      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+							      <div id="popup-content"> 
+									<ul class="collection popup-map">
+	                                </ul>
+							      </div>
+							    </div>
 							</div>				
 						</div>
 					</div>
                 </div>
 
-                <div class="col s4">
-                    <h5 class="white-text">Riesgo por regiones</h5>
+                <div class="col s4 not-selectable">
+                    <h5 class="white-text">Riesgo de oficinas por regiones</h5>
                     <p class="grey-text text-lighten-3">Riesgo de las regionales del banco, de acuerdo a los resultados de sus oficinas.</p>
-                    <div id="polar-chart-holder">
+                    <div id="polar-chart-holder" unselectable="on">
                         <canvas id="polar-chart-country" width="200"></canvas>
                     </div>
                 </div>
@@ -38,8 +44,51 @@
 	background-color: #75cff0;
 	}
 
-	      #map {
-        /* Image craeted by tatyana, from https://sftextures.com/2014/10/22/blue-sky-with-blurred-white-clouds-seamless-textures/ */
-        /*background-color:#00bcd4;*/
+.ol-popup {
+        position: absolute;
+        background-color: white;
+        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #cccccc;
+        bottom: 12px;
+        left: -50px;
+        min-width: 350px;
+      }
+      .ol-popup:after, .ol-popup:before {
+        top: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      .ol-popup:after {
+        border-top-color: white;
+        border-width: 10px;
+        left: 48px;
+        margin-left: -10px;
+      }
+      .ol-popup:before {
+        border-top-color: #cccccc;
+        border-width: 11px;
+        left: 48px;
+        margin-left: -11px;
+      }
+      .ol-popup-closer {
+        text-decoration: none;
+        position: absolute;
+        top: 2px;
+        right: 8px;
+        color:#8b8b8b;
+      }
+      .ol-popup-closer:after {
+        content: "✖";
+      }
+
+      ul.popup-map li{
+		padding: 4px !important;
       }
 </style>
