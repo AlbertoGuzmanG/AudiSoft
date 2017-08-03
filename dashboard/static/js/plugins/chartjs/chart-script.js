@@ -2,59 +2,58 @@
 * Trending line chart
 */
 //var randomScalingFactor = function(){ return Math.round(Math.random()*10)};
-// var data = {
-// 	labels : ["JAN","FEB","MAR","APR","MAY","JUNE","JULY"],
-// 	datasets : [
-// 		{
-// 			label: "First dataset",
-// 			fillColor : "rgba(128, 222, 234, 0.6)",
-// 			strokeColor : "#ffffff",
-// 			pointColor : "#00bcd4",
-// 			pointStrokeColor : "#ffffff",
-// 			pointHighlightFill : "#ffffff",
-// 			pointHighlightStroke : "#ffffff",
-// 			data: [1, 5, 2, 4, 8, 5, 8]
-// 		},
-// 		{
-// 			label: "Second dataset",
-// 			fillColor : "rgba(128, 222, 234, 0.3)",
-// 			strokeColor : "#80deea",
-// 			pointColor : "#00bcd4",
-// 			pointStrokeColor : "#80deea",
-// 			pointHighlightFill : "#80deea",
-// 			pointHighlightStroke : "#80deea",
-// 			data: [6, 2, 9, 2, 5, 10, 4]
-// 		},
-// 		{
-// 			label: "Second dataset",
-// 			fillColor : "rgba(128, 222, 234, 0.3)",
-// 			strokeColor : "#80deea",
-// 			pointColor : "#00bcd4",
-// 			pointStrokeColor : "#80deea",
-// 			pointHighlightFill : "#80deea",
-// 			pointHighlightStroke : "#80deea",
-// 			data: [1, 2, 9, 2, 5, 10, 4]
-// 		}
-// 	]
-// };
+var labels = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
+var initialLabels = labels.slice(0,7);
+
+var data = {
+	labels : initialLabels,
+	datasets : [
+		{
+			label: "First dataset",
+			fillColor : "rgba(128, 222, 234, 0.6)",
+			strokeColor : "#ffffff",
+			pointColor : "#00bcd4",
+			pointStrokeColor : "#ffffff",
+			borderColor :  "rgba(255,255,255,0.4)",
+			pointHighlightFill : "#ffffff",
+			pointHighlightStroke : "#ffffff",
+			data: [1, 5, 2, 4, 8, 5, 8]
+		},
+		{
+			label: "Second dataset",
+			fillColor : "rgba(128, 222, 234, 0.3)",
+			strokeColor : "#80deea",
+			pointColor : "#00bcd4",
+			pointStrokeColor : "#80deea",
+			borderColor :  "rgba(255,255,255,0.4)",
+			pointHighlightFill : "#80deea",
+			pointHighlightStroke : "#80deea",
+			data: [6, 2, 9, 2, 5, 10, 4]
+		}
+	]
+};
 
 var nReloads = 0;
 var min = 1;
 var max = 10;
-var l =0;
+var l =7;
 var trendingLineChart;
 function update() {
 	nReloads++;
 
 	var x = Math.floor(Math.random() * (max - min + 1)) + min;
 	var y = Math.floor(Math.random() * (max - min + 1)) + min;
-	trendingLineChart.addData([x, y], data.labels[l]);
+	trendingLineChart.addData([x, y], labels[l]);
 	trendingLineChart.removeData();
 	l++;
-	if( l == data.labels.length)
+	if( l == labels.length)
 		{ l = 0;}
 }
-// setInterval(update, 3000);
+setInterval(update, 3000);
+
+
+
+
 
 
 
@@ -213,47 +212,11 @@ $.get('/dashboard/data')
 
 		var k = [];
 
-		for (var i = 0; i <= 12; i++) {
-			k.push(i);
+		// for (var i = 0; i <= 12; i++) {
+		// 	k.push(i);
 		// 	var ih = indicators_behaviour_last_y.filter((v) => )
-		}
+		// }
 
-
-var data = {
-	labels : labels,
-	datasets : [
-		{
-			label: "First dataset",
-			fillColor : "rgba(128, 222, 234, 0.6)",
-			strokeColor : "#ffffff",
-			pointColor : "#00bcd4",
-			pointStrokeColor : "#ffffff",
-			pointHighlightFill : "#ffffff",
-			pointHighlightStroke : "#ffffff",
-			data: k
-		},
-		{
-			label: "Second dataset",
-			fillColor : "rgba(128, 222, 234, 0.3)",
-			strokeColor : "#80deea",
-			pointColor : "#00bcd4",
-			pointStrokeColor : "#80deea",
-			pointHighlightFill : "#80deea",
-			pointHighlightStroke : "#80deea",
-			data: k
-		},
-		{
-			label: "Second dataset",
-			fillColor : "rgba(128, 222, 234, 0.3)",
-			strokeColor : "#80deea",
-			pointColor : "#00bcd4",
-			pointStrokeColor : "#80deea",
-			pointHighlightFill : "#80deea",
-			pointHighlightStroke : "#80deea",
-			data: k
-		}
-	]
-};
 
 
 	var trendingLineChart = document.getElementById("trending-line-chart").getContext("2d");
@@ -295,7 +258,6 @@ var data = {
 			responsive: true
 		}
 	);
-
 
 
 	})
