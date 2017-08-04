@@ -6,6 +6,13 @@ var MapView = function(scope, object_name) {
 	var container = document.getElementById('popup');
 	var content = document.getElementById('ul-popup-content');
 	var closer = document.getElementById('popup-closer');
+
+	//Getting Rep. Dom. center vier
+	var view = new ol.View({
+          center: [-7827756.142193, 2137777.233628, -7686973.372364, 2289551.494243],
+          zoom: 7,
+          minZoom:8
+    });
 	 
 	var overlay = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
 		element: container,
@@ -17,12 +24,8 @@ var MapView = function(scope, object_name) {
 	
 	closer.onclick = function() {
 		overlay.setPosition(undefined);
-		//closer.blur();
 		return false;
 	};	
-
-	//overlay.setPosition([-7840893.756429513, 2159791.0977741308]);
-	//End of popup
 
 	var regions_location = {
 		"type": "FeatureCollection",
@@ -172,11 +175,7 @@ var MapView = function(scope, object_name) {
 	    overlays: [overlayPopup, overlay],
 	    layers: layers_list,
 	    layer: 'os_licenced_background_colour',
-	    view: new ol.View({
-          center: [-7827756.142193, 2137777.233628, -7686973.372364, 2289551.494243],
-          zoom: 7,
-          minZoom:8
-        })
+	    view: view
 	});
 
 	$(map.getViewport()).on("dblclick", function(e) {
