@@ -2,8 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from AudISoft.extension import JsonResponse
 
-from .models import Dashboard
-
+from dashboard.models.entities import Dashboard
 # Create your views here.
 
 def dashboard(request):
