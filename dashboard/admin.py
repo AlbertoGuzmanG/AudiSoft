@@ -1,5 +1,5 @@
 from django.contrib import admin
-from dashboard.models.entities import Indicator, Office, Region
+from dashboard.models import Indicator, Office, Region
 # Register your models here.
 
 class RegionAdmin(admin.ModelAdmin):
