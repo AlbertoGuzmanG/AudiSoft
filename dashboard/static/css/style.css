@@ -943,8 +943,8 @@ h5.breadcrumbs-header {
   top: 5px;
 }
 .chart-revenue-switch {
-  padding-top: 28px;
-  padding-right: 10px;
+  padding-bottom: 30px;
+  /*padding-right: 10px;*/
   color: #fff;
   text-align: right;
 }
@@ -2021,4 +2021,15 @@ footer.page-footer {
   #card-stats .card-stats-compare{
 	  font-size: 0.8rem;
   }
+}
+
+
+/* Custom css */
+
+canvas {
+  padding: 10px;
+}
+
+.select-wrapper{
+  display: none;
 }
