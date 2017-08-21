@@ -41,7 +41,7 @@ class OfficeModel(Office):
 		office_list = []
 		regions = {}		
 		category_indicators = IndicatorCategory.objects.all()
-		offices_information = Dashboard.get_sql_data('call risk_information_tree()')
+		offices_information = ViewManager.get_tree_risk(3, {})
 		office_indicator_risk = self.get_indicator_risk_by_office(offices_information)
 
 		for office in Office.objects.all():

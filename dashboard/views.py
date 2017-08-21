@@ -10,7 +10,7 @@ def dashboard(request):
 
 def office_risk():
 	res_object = {}
-	res_object['office_risk'] = OfficeModel.get_risk()
+	res_object['office_risk'] = OfficeModel().get_risk()
 	return JsonResponse(res_object, safe=False)
 
 def dashboard_data(request):
@@ -18,5 +18,5 @@ def dashboard_data(request):
 	res_object['top_ten_indicator'] = Dashboard.get_view('top_ten_indicator')
 	res_object['incidents_by_category'] = Dashboard.get_view('incidents_by_category')
 	res_object['indicators_behaviour_last_y'] = Dashboard.get_view('indicators_behaviour_last_y')
-
+	res_object['indicators_behaviour_last_y'] = Dashboard.get_view('indicators_behaviour_last_y')
 	return JsonResponse(res_object, safe=False)
