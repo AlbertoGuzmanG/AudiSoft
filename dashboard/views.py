@@ -6,7 +6,7 @@ from .submodels.office_model import OfficeModel
 # Create your views here.
 
 def dashboard(request):
-    return render(request,'dashboard/index.html')
+	return render(request,'dashboard/index.html')
 
 def office_risk():
 	res_object = {}
