@@ -3,11 +3,17 @@ from django.http import HttpResponse
 from AudISoft.extension import JsonResponse
 
 from .models import Dashboard
+from .submodels.office_model import OfficeModel
 
 # Create your views here.
 
 def dashboard(request):
     return render(request,'dashboard/index.html')
+
+def office_risk():
+	res_object = {}
+	res_object['office_risk'] = OfficeModel.get_risk()
+	return JsonResponse(res_object, safe=False)
 
 def dashboard_data(request):
 	res_object = {}

@@ -48,7 +48,7 @@
 	            responsive: true,
 	             type: 'pie',
 	            legend: {
-	                position: 'right',
+	                position: 'left',
 	            },
 	            scale: {
 	              ticks: {

@@ -87,3 +87,6 @@ class Dashboard():
 	def get_view(view_name):
 		return Dashboard.dictfetchall('select * from {0}'.format(view_name))
 
+	@staticmethod
+	def get_sql_data(sql):
+		return Dashboard.dictfetchall(sql)
