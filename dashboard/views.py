@@ -1,10 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from AudISoft.extension import JsonResponse
-
 from .models import Dashboard
 from .submodels.office_model import OfficeModel
-
 # Create your views here.
 
 def dashboard(request):
