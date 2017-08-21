@@ -2033,3 +2033,8 @@ canvas {
 .select-wrapper{
   display: none;
 }
+
+.collection-item > .switch{
+  width: 50%;
+  margin: 0 auto;
+}
