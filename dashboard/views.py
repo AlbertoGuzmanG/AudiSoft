@@ -8,10 +8,32 @@ from .submodels.office_model import OfficeModel
 def dashboard(request):
 	return render(request,'dashboard/index.html')
 
-def office_risk():
+def office_risk(request):
 	res_object = {}
-	res_object['office_risk'] = OfficeModel().get_risk()
-	return JsonResponse(res_object, safe=False)
+	risk_information = OfficeModel().get_risk(1)
+
+	offices = []
+	for office in risk_information['offices']:
+
+		offices.append({
+			"type": "Feature",
+			"properties": {
+				"Y": office['location'][1],
+				"X": office['location'][0],
+				"info": {
+					"code": {"label": "Código", "value": office['code']},
+					"address": {"label": "Dirección", "value": office['address']},
+					"schedule": {"label": "Horario", "value": office['schedule']},
+					"office_name": {"label": "Oficina", "value": office['name']},
+					"region": {"label": "Región", "value": office['region']},
+					"type": {"label": "Tipo", "value": "SUC"},
+					'info': office['categories'],
+					'risk': office['risk']
+				}
+			}
+		})
+
+	return JsonResponse({'offices': offices}, safe=False)
 
 def dashboard_data(request):
 	res_object = {}

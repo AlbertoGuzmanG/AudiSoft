@@ -3,7 +3,8 @@ from dashboard.models import Office, IndicatorCategory, Dashboard
 from dashboard.sql_view_manager import ViewManager
 from pprint import pprint
 
-class OfficeModel(Office):
+class OfficeModel():
+	indicator_type = 0
 
 	#Getting total ammount of each indicator
 	def sum_by_indicator(self, indicators_data):
@@ -37,11 +38,17 @@ class OfficeModel(Office):
 		return indicators_risk
 
 
-	def get_risk(self):
-		office_list = []
+	def get_risk(self, indicator_type):
 		regions = {}		
-		category_indicators = IndicatorCategory.objects.all()
-		offices_information = ViewManager().get_tree_risk(3, {})
+		office_list = []
+		executions_count = 3 #TODO get this value from config
+
+		self.indicator_type = indicator_type
+		#Getting category indicatos by indicator type
+		category_indicators = IndicatorCategory.objects.all().filter(indicator_type_id = self.indicator_type)
+		#Getting indicators data from las N executions
+		offices_information = ViewManager().get_tree_risk(executions_count, {'indicator_type' : self.indicator_type})
+		#Grouping information by indicator and office
 		office_indicator_risk = self.get_indicator_risk_by_office(offices_information)
 
 		for office in Office.objects.all():
@@ -52,10 +59,13 @@ class OfficeModel(Office):
 			office_object = {
 				'risk': 0,
 				'id': office.id,
-				'category_risk': {},
+				'categories': {},
 				'code': office.code,
 				'name': office.name,
-				'address': office.address
+				'address': office.address,
+				'schedule': 'ToBe defined', #TODO get this from database
+				'region': office.region.name,
+				'location': office.location
 			}			
 
 			for category_indicator in category_indicators:
@@ -66,38 +76,47 @@ class OfficeModel(Office):
 
 				indicator_risk = office_indicator_risk[key]
 				category_id = category_indicator.category_id
+
+				#Getting category weight by indicator type
+				category_weight = (category_indicator.category.categoryweight_set.filter(indicator_type_id = self.indicator_type).values()[0])['weight']
+				#Calculating category indicator risk
 				category_indicator_risk = (indicator_risk['percent'] / 100) *  category_indicator.weight
-				indicator_risk['category_risk'] = category_indicator_risk
+				#Calculating weight risk for indicators
+				indicator_risk['weight_risk'] = category_indicator_risk
+				#Calculating weight risk for categories
+				weight_risk = (category_indicator_risk / 100) * category_weight
 
 				#Adding category indicator risk
 				if category_id in categories_risk:
-					categories_risk[category_id]['total_risk'] += category_indicator_risk
+					categories_risk[category_id]['partial_risk'] += category_indicator_risk
+					categories_risk[category_id]['weight_risk'] +=  weight_risk
 				else:
 				#Creating new category indicator risk
-					category_count = category_count + 1
 					categories_risk[category_id] = {
 						'id': category_id,
-						'name': 'To be defined',
-						'total_risk': category_indicator_risk,
+						'name': category_indicator.category.name,
+						'partial_risk': category_indicator_risk,
+						'weight_risk': weight_risk,
 						'indicators': []
 					}
 
 				categories_risk[category_id]['indicators'].append(indicator_risk.copy())
-				sum_indicator_risk += category_indicator_risk				
+				sum_indicator_risk += weight_risk				
 
-			office_object['category_risk'] = categories_risk
-			office_object['risk'] = sum_indicator_risk / category_count if category_count > 0 else 0
+			office_object['categories'] = categories_risk
+			office_object['risk'] = sum_indicator_risk
 
 			office_list.append(office_object.copy())
 
 			if office.region_id in regions:
-				regions[office.region_id]['risk'] = office_object['risk']
+				regions[office.region_id]['risk'] += office_object['risk']
 			else:
 				regions[office.region_id] = {
 					'id': office.region_id,
 					'name': office.region.name,
-					'location': office.region.area[0].coords,
-					'risk': 0
+					'location': office.region.area[0].coords if office.region.area else '',
+					'risk': office_object['risk']
 				}	
 
+		pprint(regions)
 		return  {'offices': office_list, 'regions': regions}
