@@ -45,11 +45,16 @@ class IndicatorCategory(BaseModel):
 	weight = models.IntegerField()
 	indicator = models.ForeignKey(Indicator, on_delete=models.PROTECT)
 	category = models.ForeignKey(Category, on_delete=models.PROTECT)
-
+	indicator_type = models.ForeignKey(IndicatorType, on_delete=models.PROTECT);
 	region = models.ForeignKey(Region, on_delete=models.PROTECT)
 
 	def __str__(self):
 		return self.name
+
+class CategoryWeight(BaseModel):
+	weight = models.IntegerField()
+	indicator_type = models.ForeignKey(IndicatorType, on_delete=models.PROTECT);
+	category = models.ForeignKey(Category, on_delete=models.PROTECT)
 
 class Office(BaseModel):
 	code = models.CharField(max_length=50)
@@ -57,6 +62,8 @@ class Office(BaseModel):
 	address = models.CharField(max_length=50)
 	location = models.PointField(null=True)
 	region = models.ForeignKey(Region, on_delete=models.PROTECT)
+	schedule = models.CharField(max_length=500)
+	office_type = models.CharField(max_length=4)
 
 	def __str__(self):
 		return self.name
@@ -87,3 +94,6 @@ class Dashboard():
 	def get_view(view_name):
 		return Dashboard.dictfetchall('select * from {0}'.format(view_name))
 
+	@staticmethod
+	def get_sql_data(sql):
+		return Dashboard.dictfetchall(sql)
