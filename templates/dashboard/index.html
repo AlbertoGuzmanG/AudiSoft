@@ -1,6 +1,5 @@
 {% extends 'base/base.html'%}
 
-
 {% block content %}
 
 <div id="chart-dashboard">
@@ -14,7 +13,7 @@
                                 <div class="switch chart-revenue-switch right">
                                     <select id="select-state" placeholder="Dime cuales sucursales quieres comparar..">
                                         <option value="">Sucursal..</option>
-                                        <option value="333" >UNP UASD</option>
+                                        <option value="333">UNP UASD</option>
                                         <option value="160">Ave. Tiradentes</option>
                                         <option value="164">Dirección Gral. Tránsito Terrestre</option>
                                         <option value="165">Plaza Florida</option>
@@ -46,7 +45,9 @@
                     </div>
                     <div class="card-content">
                         <a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="mdi-content-add activator"></i></a>
-
+                        <div class="progress">
+                          <div class="indeterminate"></div>
+                        </div>
                     </div>
 
                     <div class="card-reveal">
@@ -158,12 +159,12 @@
                     <p class="task-card-date">{% now "F d, Y" %}</p>
                 </li>
                 <li class="collection-item dismissable">
-                      <div class="switch">
+                    <div class="switch">
                         <label> Monto <input type="checkbox"> <span class="lever"></span> Cantidad </label>
                       </div>
                 </li>
-
             </ul>
+
         </div>
         <div class="col s12 m8 l8">
             <div class="card">
@@ -173,22 +174,20 @@
                   </div>
             </div>
         </div>
-            <!-- <div class="col s12 m8 l4">
-                    <div class="card">
-                        <div class="sample-chart-wrapper">
-                            <span>Top Indicadores por Categorías</span>
-                            <canvas id="top-indicadores-categorias" height="140"></canvas>
-                          </div>
-                    </div>
-
-            </div> -->
-        <div class="col s12 m12 l4">
+<!--         <div class="col s12 m8 l4">
+            <div class="card">
+                <div class="sample-chart-wrapper">
+                    <span>Top Indicadores por Categorías</span>
+                    <canvas id="top-indicadores-categorias" height="140"></canvas>
+                  </div>
+            </div>
+        
+        </div>
+        <div class="col s12 m12 l6">
             <ul id="issues-collection" class="collection">
                 <li class="collection-item avatar">
                     <i class="mdi-action-bug-report circle red darken-2"></i>
-                    <span class="collection-header">Termometro</span>
-                    <!-- <p>Assigned to you</p> -->
-                    <!-- <a href="index.html#" class="secondary-content"><i class="mdi-action-grade"></i></a> -->
+                    <span class="collection-header"><h5>Termometro</h5></span>
                 </li>
                 <li class="collection-item">
                     <div class="row">
@@ -255,7 +254,7 @@
                     </div>
                 </li>
             </ul>
-        </div>
+        </div> -->
     </div>
 </div>
 
@@ -271,475 +270,415 @@
 
 {% endblock %}
 
-
 {% block scripts%}
+    <script type="text/javascript" src="/static/js/chart_script.js"></script>
+    <script type="text/javascript" src="/static/js/initial_components.js"></script>
+    <script>
+            // var trendingLineChart = document.getElementById("top-indicadores-categorias").getContext("2d");
+            //  new Chart(trendingLineChart, {
+            //     type: 'bar',
+            //     data: {
+            //         labels : ["JAN","FEB","MAR","APR","MAY"],
+            //         datasets: [
+            //         {
+            //             code : '333',
+            //             label: "UNP UASD",
+            //             backgroundColor : "rgba(128, 222, 234, 0.6)",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(2  55,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#ffffff",
+            //             pointHoverBackgroundColor : "#ffffff",
+            //             pointHoverBorderColor : "#ffffff",
+            //             data: [1, 5, 2, 4, 8, 5, 8]
+            //         },
+            //         {
+            //             code : '160',
+            //             label: "Ave. Tiradentes",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [20, 8, 31, 5, 20, 32, 27]
+            //         },
+            //         {
+            //             code : '164',
+            //             label: "Dirección Gral. Tránsito Terrestre",
+            //             backgroundColor : "rgba(27,133,184, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [31, 48, 38, 21, 14, 42, 1]
+            //         }
+            //         ]
+            //     },
+            //     options: {}
+            // });
 
-<script>
-        var trendingLineChart = document.getElementById("top-indicadores-incidencias").getContext("2d");
-         new Chart(trendingLineChart, {
-                type: 'bar',
-                data:  {
-                "labels": ["Indicador 1", "Indicador 2", "Indicador 3", "Indicador 4", "Indicador 5", "Indicador 6", "Indicador 7"],
-                "datasets": [{
-                    "label": "My First Dataset",
-                    "data": [65, 59, 80, 81, 56, 55, 40],
-                    "fill": false,
-                    "backgroundColor": "rgba(128, 222, 234, 0.2)",
-                    "borderColor": "rgb(128, 222, 234)",
-                    "borderWidth": 1
-                }]
-            },
-            options: { legend : { display : false }, scales: {yAxes: [{ticks: {beginAtZero: true } }]
-        }
-    }
-        });
+            // var labels = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
+            // var initialLabels = labels.slice(0,7);
 
-        // var trendingLineChart = document.getElementById("top-indicadores-categorias").getContext("2d");
-        //  new Chart(trendingLineChart, {
-        //     type: 'bar',
-        //     data: {
-        //         labels : ["JAN","FEB","MAR","APR","MAY"],
-        //         datasets: [
-        //         {
-        //             code : '333',
-        //             label: "UNP UASD",
-        //             backgroundColor : "rgba(128, 222, 234, 0.6)",
-        //             pointRadius : 5,
-        //             borderColor :  "rgba(2  55,255,255,0.8)",
-        //             pointBackgroundColor : "#00bcd4",
-        //             pointBorderColor : "#ffffff",
-        //             pointHoverBackgroundColor : "#ffffff",
-        //             pointHoverBorderColor : "#ffffff",
-        //             data: [1, 5, 2, 4, 8, 5, 8]
-        //         },
-        //         {
-        //             code : '160',
-        //             label: "Ave. Tiradentes",
-        //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-        //             strokeColor : "#80deea",
-        //             pointRadius : 5,
-        //             borderColor :  "rgba(255,255,255,0.8)",
-        //             pointBackgroundColor : "#00bcd4",
-        //             pointBorderColor : "#fff",
-        //             pointHoverBackgroundColor : "#80deea",
-        //             pointHoverBorderColor : "#80deea",
-        //             data: [20, 8, 31, 5, 20, 32, 27]
-        //         },
-        //         {
-        //             code : '164',
-        //             label: "Dirección Gral. Tránsito Terrestre",
-        //             backgroundColor : "rgba(27,133,184, 0.3)",
-        //             strokeColor : "#80deea",
-        //             pointRadius : 5,
-        //             borderColor :  "rgba(255,255,255,0.8)",
-        //             pointBackgroundColor : "#00bcd4",
-        //             pointBorderColor : "#fff",
-        //             pointHoverBackgroundColor : "#80deea",
-        //             pointHoverBorderColor : "#80deea",
-        //             data: [31, 48, 38, 21, 14, 42, 1]
-        //         }
-        //         ]
-        //     },
-        //     options: {}
-        // });
+            // var dataSetData = [
+            //         {
+            //             code : '333',
+            //             label: "UNP UASD",
+            //             backgroundColor : "rgba(128, 222, 234, 0.6)",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(2  55,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#ffffff",
+            //             pointHoverBackgroundColor : "#ffffff",
+            //             pointHoverBorderColor : "#ffffff",
+            //             data: [1, 5, 2, 4, 8, 5, 8]
+            //         },
+            //         {
+            //             code : '160',
+            //             label: "Ave. Tiradentes",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [20, 8, 31, 5, 20, 32, 27]
+            //         },
+            //         {
+            //             code : '164',
+            //             label: "Dirección Gral. Tránsito Terrestre",
+            //             backgroundColor : "rgba(27,133,184, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [31, 48, 38, 21, 14, 42, 1]
+            //         },
+            //         {
+            //             code : '165',
+            //             label: "Plaza Florida",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [39, 9, 35, 47, 18, 14, 17]
+            //         },
+            //         {
+            //             code : '166',
+            //             label: "Plaza Botánika",
+            //             backgroundColor : "rgba(27,133,184, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [44, 13, 4, 46, 50, 48, 1]
+            //         },
+            //         {
+            //             code : '167',
+            //             label: "Lope de Vega ",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [41, 45, 39, 14, 23, 47, 39]
+            //         },
+            //         {
+            //             code : '169',
+            //             label: "Plaza Haché",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [22, 26, 8, 47, 49, 11, 23]
+            //         },
+            //         {
+            //             code : '240',
+            //             label: "Torre",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [2, 2, 42, 46, 26, 1, 30]
+            //         },
+            //         {
+            //             code : '241',
+            //             label: "Plaza Central",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [17, 22, 37, 46, 32, 29, 15]
+            //         },
+            //         {
+            //             code : '261',
+            //             label: "UNP SuperMercado  Nacional 27 de Febrero",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [11, 31, 16, 26, 15, 30, 21]
+            //         },
+            //         {
+            //             code : '330',
+            //             label: "Malecon Center",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [1, 47, 29, 48, 23, 7, 28]
+            //         },
+            //         {
+            //             code : '530',
+            //             label: "Diamond Plaza",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [41, 5, 36, 16, 47, 45, 21]
+            //         },
+            //         {
+            //             code : '580',
+            //             label: "Ave. 27 de Febrero",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [21, 1, 10, 21, 19, 27, 48]
+            //         },
+            //         {
+            //             code : '610',
+            //             label: "UNP La Cancillería",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [15, 26, 36, 33, 15, 18, 37]
+            //         },
+            //         {
+            //             code : '810',
+            //             label: "Blue Mall",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [41, 28, 12, 10, 1, 16, 31]
+            //         },
+            //         {
+            //             code : '820',
+            //             label: "Agora Mall",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [34, 38, 38, 48, 35, 48, 48]
+            //         },
+            //         {
+            //             code : '830',
+            //             label: "Gazcue",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [2, 50, 36, 17, 28, 4, 29]
+            //         },
+            //         {
+            //             code : '840',
+            //             label: "Galeria 360",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [37, 48, 3, 10, 18, 33, 45]
+            //         },
+            //         {
+            //             code : '890',
+            //             label: "UNP Multicentro Jose Contreras",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [26, 26, 26, 30, 13, 23, 45]
+            //         },
+            //         {
+            //             code : '011',
+            //             label: "Independencia",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [4, 18, 45, 47, 38, 42, 42]
+            //         },
+            //         {
+            //             code : '013',
+            //             label: "Máximo Gómez",
+            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
+            //             strokeColor : "#80deea",
+            //             pointRadius : 5,
+            //             borderColor :  "rgba(255,255,255,0.8)",
+            //             pointBackgroundColor : "#00bcd4",
+            //             pointBorderColor : "#fff",
+            //             pointHoverBackgroundColor : "#80deea",
+            //             pointHoverBorderColor : "#80deea",
+            //             data: [17, 38, 46, 40, 49, 17, 32]
+            //         }];
 
-        var labels = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
-        var initialLabels = labels.slice(0,7);
+            // var initialData = dataSetData.slice(0,3);
+            // var selectizeInitialData = initialData.map(dataset => dataset.code);
 
-        var dataSetData = [
-                {
-                    code : '333',
-                    label: "UNP UASD",
-                    backgroundColor : "rgba(128, 222, 234, 0.6)",
-                    pointRadius : 5,
-                    borderColor :  "rgba(2  55,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#ffffff",
-                    pointHoverBackgroundColor : "#ffffff",
-                    pointHoverBorderColor : "#ffffff",
-                    data: [1, 5, 2, 4, 8, 5, 8]
-                },
-                {
-                    code : '160',
-                    label: "Ave. Tiradentes",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [20, 8, 31, 5, 20, 32, 27]
-                },
-                {
-                    code : '164',
-                    label: "Dirección Gral. Tránsito Terrestre",
-                    backgroundColor : "rgba(27,133,184, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [31, 48, 38, 21, 14, 42, 1]
-                },
-                {
-                    code : '165',
-                    label: "Plaza Florida",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [39, 9, 35, 47, 18, 14, 17]
-                },
-                {
-                    code : '166',
-                    label: "Plaza Botánika",
-                    backgroundColor : "rgba(27,133,184, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [44, 13, 4, 46, 50, 48, 1]
-                },
-                {
-                    code : '167',
-                    label: "Lope de Vega ",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [41, 45, 39, 14, 23, 47, 39]
-                },
-                {
-                    code : '169',
-                    label: "Plaza Haché",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [22, 26, 8, 47, 49, 11, 23]
-                },
-                {
-                    code : '240',
-                    label: "Torre",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [2, 2, 42, 46, 26, 1, 30]
-                },
-                {
-                    code : '241',
-                    label: "Plaza Central",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [17, 22, 37, 46, 32, 29, 15]
-                },
-                {
-                    code : '261',
-                    label: "UNP SuperMercado  Nacional 27 de Febrero",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [11, 31, 16, 26, 15, 30, 21]
-                },
-                {
-                    code : '330',
-                    label: "Malecon Center",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [1, 47, 29, 48, 23, 7, 28]
-                },
-                {
-                    code : '530',
-                    label: "Diamond Plaza",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [41, 5, 36, 16, 47, 45, 21]
-                },
-                {
-                    code : '580',
-                    label: "Ave. 27 de Febrero",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [21, 1, 10, 21, 19, 27, 48]
-                },
-                {
-                    code : '610',
-                    label: "UNP La Cancillería",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [15, 26, 36, 33, 15, 18, 37]
-                },
-                {
-                    code : '810',
-                    label: "Blue Mall",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [41, 28, 12, 10, 1, 16, 31]
-                },
-                {
-                    code : '820',
-                    label: "Agora Mall",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [34, 38, 38, 48, 35, 48, 48]
-                },
-                {
-                    code : '830',
-                    label: "Gazcue",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [2, 50, 36, 17, 28, 4, 29]
-                },
-                {
-                    code : '840',
-                    label: "Galeria 360",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [37, 48, 3, 10, 18, 33, 45]
-                },
-                {
-                    code : '890',
-                    label: "UNP Multicentro Jose Contreras",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [26, 26, 26, 30, 13, 23, 45]
-                },
-                {
-                    code : '011',
-                    label: "Independencia",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [4, 18, 45, 47, 38, 42, 42]
-                },
-                {
-                    code : '013',
-                    label: "Máximo Gómez",
-                    backgroundColor : "rgba(128, 222, 234, 0.3)",
-                    strokeColor : "#80deea",
-                    pointRadius : 5,
-                    borderColor :  "rgba(255,255,255,0.8)",
-                    pointBackgroundColor : "#00bcd4",
-                    pointBorderColor : "#fff",
-                    pointHoverBackgroundColor : "#80deea",
-                    pointHoverBorderColor : "#80deea",
-                    data: [17, 38, 46, 40, 49, 17, 32]
-                }];
+            // var ctx = document.getElementById("trending-line-chart").getContext("2d");
+            // chart_test = new Chart(ctx, {
+            //     type: 'line',
+            //     data: {labels : initialLabels, datasets : [] },
+            //     options: {
+            //         fontColor : 'white',
+            //         tooltips : {
+            //             backgroundColor: "rgba(255,255,255,0.8)",
+            //             FontSize: 12,
+            //             FontColor: "#000",
+            //             TitleFontFamily: "'Roboto','Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+            //             TitleFontSize: 14,
+            //             TitleFontStyle: "bold",
+            //             TitleFontColor: "#000",
+            //             YPadding: 8,
+            //             XPadding: 16,
+            //             CaretSize: 10,
+            //             CornerRadius: 6
+            //         },
+            //         scaleLabel : {
+            //             xAxes : [{
+            //                 labels : {display : false }
+            //             }]
+            //         },
+            //         scales: {
+            //             yAxes: [{
+            //                 gridLines: {
+            //                     color: 'rgba(255,255,255,0.4)'
+            //                 }
+            //             }],
+            //             xAxes: [{
+            //                 gridLines: {
+            //                     display: false
+            //                 }
+            //             }]
+            //         },
+            //         legend: {
+            //             display: 'none',
+            //             labels: {
+            //                 fontColor: 'white'
+            //             }
+            //         }
+            //     }
+            // });
 
-        var initialData = dataSetData.slice(0,3);
-        var selectizeInitialData = initialData.map(dataset => dataset.code);
+            // // new Chart(document.getElementById("doughnut-chart"), {
+            // //     "type": "doughnut",
+            // //     "data": {
+            // //         "labels": ["Red", "Blue", "Yellow"],
+            // //         "datasets": [{
+            // //             "label": "My First Dataset",
+            // //             "data": [300, 50, 100],
+            // //             "backgroundColor": ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"]
+            // //         }]
+            // //     },
+            // //     options : {
+            // //         legend:{ display : false}
+            // //     }
+            // // });
 
-        var ctx = document.getElementById("trending-line-chart").getContext("2d");
-        chart_test = new Chart(ctx, {
-            type: 'line',
-            data: {labels : initialLabels, datasets : [] },
-            options: {
-                fontColor : 'white',
-                tooltips : {
-                    backgroundColor: "rgba(255,255,255,0.8)",
-                    FontSize: 12,
-                    FontColor: "#000",
-                    TitleFontFamily: "'Roboto','Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-                    TitleFontSize: 14,
-                    TitleFontStyle: "bold",
-                    TitleFontColor: "#000",
-                    YPadding: 8,
-                    XPadding: 16,
-                    CaretSize: 10,
-                    CornerRadius: 6
-                },
-                scaleLabel : {
-                    xAxes : [{
-                        labels : {display : false }
-                    }]
-                },
-                scales: {
-                    yAxes: [{
-                        gridLines: {
-                            color: 'rgba(255,255,255,0.4)'
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            display: false
-                        }
-                    }]
-                },
-                legend: {
-                    display: 'none',
-                    labels: {
-                        fontColor: 'white'
-                    }
-                }
-            }
-        });
-
-        // new Chart(document.getElementById("doughnut-chart"), {
-        //     "type": "doughnut",
-        //     "data": {
-        //         "labels": ["Red", "Blue", "Yellow"],
-        //         "datasets": [{
-        //             "label": "My First Dataset",
-        //             "data": [300, 50, 100],
-        //             "backgroundColor": ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"]
-        //         }]
-        //     },
-        //     options : {
-        //         legend:{ display : false}
-        //     }
-        // });
-
-        // var myBarChart = new Chart(document.getElementById("trending-bar-chart"), {
-        //     type: 'bar',
-        //     data: {
-        //         labels : ["JAN","FEB","MAR","APR","MAY"],
-        //         datasets: [
-        //             {
-        //                 label: "Av. 27 de febrero",
-        //                 backgroundColor: "#46BFBD",
-        //                 borderColor: "#46BFBD",
-        //                 hoverBackgroundColor: "rgba(70, 191, 189, 0.4)",
-        //                 hoverBorderColor: "rgba(70, 191, 189, 0.9)",
-        //                 data: [6, 9, 8, 4, 6]
-        //             }
-        //         ]
-        //     },
-        //     options: {}
-        // });
-
-        // display or hide offices on risk chart
-        var selectizeItemAddHandler = function (value, element) {
-            var officeIndex = dataSetData.map(a => a.code).indexOf(value);
-            var officeItem = dataSetData[officeIndex];
-
-            chart_test.chart.data.datasets.push(officeItem);
-            chart_test.update();
-        }
-
-        // display or hide offices on risk chart
-        var selectizeItemRemoveHandler = function (value, element) {
-            var officeIndex = chart_test.chart.data.datasets.map(a => a.code).indexOf(value);
-            chart_test.chart.data.datasets.splice(officeIndex, 1);
-            chart_test.update();
-        }
-
-        var loadInitialSelectizeData = function () {
-
-            $('.selectize-control').hide();
-
-            for(var d in initialData) {
-                chart_test.chart.data.datasets.push(initialData[d]);
-            }
-
-            chart_test.update();
-        }
-
-        $('#filter-btn').on('click', function () {
-            $('.selectize-control').fadeToggle();
-        })
-
-        var revenueSelectize = $('#select-state').selectize({
-            maxItems: 3,
-            items : selectizeInitialData,
-            onItemAdd : selectizeItemAddHandler,
-            onItemRemove : selectizeItemRemoveHandler
-        });
-
-        loadInitialSelectizeData();
-
-</script>
+            // // var myBarChart = new Chart(document.getElementById("trending-bar-chart"), {
+            // //     type: 'bar',
+            // //     data: {
+            // //         labels : ["JAN","FEB","MAR","APR","MAY"],
+            // //         datasets: [
+            // //             {
+            // //                 label: "Av. 27 de febrero",
+            // //                 backgroundColor: "#46BFBD",
+            // //                 borderColor: "#46BFBD",
+            // //                 hoverBackgroundColor: "rgba(70, 191, 189, 0.4)",
+            // //                 hoverBorderColor: "rgba(70, 191, 189, 0.9)",
+            // //                 data: [6, 9, 8, 4, 6]
+            // //             }
+            // //         ]
+            // //     },
+            // //     options: {}
+            // // });
+    </script>
 {% endblock %}
