@@ -184,8 +184,8 @@ var MapView = function(scope, object_name) {
 	$(map.getViewport()).on("dblclick", function(e) {
 	    map.forEachFeatureAtPixel(map.getEventPixel(e), function (feature, layer) {
 	       map.getView().setCenter( [current_position.lat, current_position.long]);
+	       hidePopup();
 	       setOffices(feature.U.info.region_name.value);
-	       console.log(feature.U.info.region_name.value);
 	       map.getView().setZoom(10);
 	    });
 	});

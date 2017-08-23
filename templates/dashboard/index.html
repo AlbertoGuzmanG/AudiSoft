@@ -139,7 +139,7 @@
                 </li>
                 <li class="collection-item dismissable">
                     <div class="switch">
-                        <label> Cantidad <input type="checkbox" ng-model='settings.by_amount' ng-change='alert()'> <span class="lever"></span> Monto </label>
+                        <label> Cantidad <input type="checkbox" ng-model='indicator_type' ng-change='indicator_change()'> <span class="lever"></span> Monto </label>
                       </div>
                 </li>
             </ul>
@@ -237,7 +237,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" ng-controller='map_view'>
     <div class="col s12 m12">
         <div class="card" style="padding:2px 13px 2px 13px">
             {% include 'dashboard/map_view.html'%}
