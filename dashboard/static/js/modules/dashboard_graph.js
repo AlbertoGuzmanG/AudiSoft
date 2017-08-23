@@ -5,19 +5,16 @@ app.config(['$interpolateProvider', function($interpolateProvider) {
   $interpolateProvider.endSymbol(']]');
 }]);
 
-app.controller('dashboardController', ['$scope', '$http', function($scope, $http){
+app.controller('dashboardController', ['$scope', '$http', function(scope, http){
 
-	$scope.settings = { by_amount : true}
+	scope.settings = { by_amount : true}
 
-	getOffices().then(()=>{
-		fillSelectizeOfficesControl();
-		getTrendingLineCharData();
-	});
+	getOffices().then(loadGraphs);
 
 	function getOffices() {
-		return $http.get('/api/offices')
+		return http.get('/api/offices')
 			.then((response) => {
-				$scope.offices = response.data;
+				scope.offices = response.data;
 			});
 	}
 
@@ -25,14 +22,15 @@ app.controller('dashboardController', ['$scope', '$http', function($scope, $http
 		fillTrendingLineChar();
 	}
 
-	function loadAllGraphData() {
-		
+	function loadGraphs(){
+		fillSelectizeOfficesControl();
+		getTrendingLineCharData();
 	}
 
 	function fillSelectizeOfficesControl() {
 		var selectize = $('#select-state')[0].selectize;
 
-		$scope.offices.forEach((office) =>{
+		scope.offices.forEach((office) =>{
 			selectize.addOption({ value : office.code, text : office.name});
 		});
 	}

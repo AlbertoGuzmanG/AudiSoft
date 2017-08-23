@@ -1,7 +1,7 @@
 /* Initial Data */
 var monthsLabels = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
 var initialMonthLabels = monthsLabels.slice(0,7); // default show first 7 months
-Chart.defaults.global.defaultFontColor = "#fff";
+// Chart.defaults.global.defaultFontColor = "#fff";
 
 var revenueSelectize = $('#select-state').selectize({maxItems: 3, items: ['10']});
 
@@ -10,8 +10,7 @@ $('#filter-btn').on('click', function () {
     $('.selectize-control').fadeToggle();
 });
 // on load, hide selectize control
-$('.selectize-control').hide();
-
+// $('.selectize-control').hide();
 
 var trendingLineChartCtx = document.getElementById("trending-line-chart").getContext("2d");
 trendingLineChar = new Chart(trendingLineChartCtx, {
@@ -134,3 +133,84 @@ function officesRiskChart(chartData) {
 		revenueSelectize[0].selectize.addItem(item);
 	});
 }
+
+
+window.chartColors = {
+    red: 'rgb(255, 99, 132)',
+    orange: 'rgb(255, 159, 64)',
+    yellow: 'rgb(255, 205, 86)',
+    green: 'rgb(75, 192, 192)',
+    blue: 'rgb(54, 162, 235)',
+    purple: 'rgb(153, 102, 255)',
+    grey: 'rgb(201, 203, 207)'
+};
+
+
+window.randomScalingFactor = function() {
+    return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+};
+
+var topIndicatorsByCategoryCtx = document.getElementById("top-indicadores-regiones").getContext("2d");
+var topIndicatorsByCategory = new Chart(topIndicatorsByCategoryCtx, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                ],
+                backgroundColor: [
+                    window.chartColors.red,
+                    window.chartColors.green,
+                    window.chartColors.orange,
+                    window.chartColors.green,
+                    window.chartColors.red,
+                    window.chartColors.yellow,
+                    window.chartColors.green,
+                    window.chartColors.red,
+                    window.chartColors.orange,
+                    window.chartColors.blue,
+                    window.chartColors.yellow,
+                    window.chartColors.blue
+                ],
+                label: 'Dataset 1'
+            }],
+            labels: [
+                "METROPOLITANA NORTE",
+                "METROPOLITANA CENTRAL",
+                "METROPOLITANA OESTE",
+                "METROPOLITANA ORIENTAL",
+                "ZONA ESTE",
+                "ZONA SANTIAGO ESTE",
+                "ZONA SANTIAGO OESTE",
+                "ZONA NORCENTRAL",
+                "ZONA NORDESTE",
+                "ZONA NOROESTE",
+                "ZONA SURESTE",
+                "ZONA SUROESTE"
+            ]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: false
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        }
+    }   );
