@@ -48,6 +48,7 @@ class OfficeModel():
 		category_indicators = IndicatorCategory.objects.all().filter(indicator_type_id = self.indicator_type)
 		#Getting indicators data from las N executions
 		offices_information = ViewManager().get_tree_risk(executions_count, {'indicator_type' : self.indicator_type})
+		pprint(offices_information)
 
 		#Grouping information by indicator and office
 		office_indicator_risk = self.get_indicator_risk_by_office(offices_information)
