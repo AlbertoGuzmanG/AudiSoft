@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div id="chart-dashboard">
+<div id="chart-dashboard" ng-controller='dashboardController'>
     <div class="row">
         <div class="col s12 m8 l8">
             <div class="card">
@@ -13,27 +13,6 @@
                                 <div class="switch chart-revenue-switch right">
                                     <select id="select-state" placeholder="Dime cuales sucursales quieres comparar..">
                                         <option value="">Sucursal..</option>
-                                        <option value="333">UNP UASD</option>
-                                        <option value="160">Ave. Tiradentes</option>
-                                        <option value="164">Dirección Gral. Tránsito Terrestre</option>
-                                        <option value="165">Plaza Florida</option>
-                                        <option value="166">Plaza Botánika</option>
-                                        <option value="167">Lope de Vega </option>
-                                        <option value="169">Plaza Haché</option>
-                                        <option value="240">Torre</option>
-                                        <option value="241">Plaza Central</option>
-                                        <option value="261">UNP SuperMercado  Nacional 27 de Febrero</option>
-                                        <option value="330">Malecon Center</option>
-                                        <option value="530">Diamond Plaza</option>
-                                        <option value="580">Ave. 27 de Febrero</option>
-                                        <option value="610">UNP La Cancillería</option>
-                                        <option value="810">Blue Mall</option>
-                                        <option value="820">Agora Mall</option>
-                                        <option value="830">Gazcue</option>
-                                        <option value="840">Galeria 360</option>
-                                        <option value="890">UNP Multicentro Jose Contreras</option>
-                                        <option value="011">Independencia</option>
-                                        <option value="013">Máximo Gómez</option>
                                     </select>
                                     <button id="filter-btn" class="btn waves-effect waves-light cyan darken-2">Filtrar</button>
                                 </div>
@@ -45,7 +24,7 @@
                     </div>
                     <div class="card-content">
                         <a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="mdi-content-add activator"></i></a>
-                        <div class="progress">
+                        <div class="progress" ng-if='loading.offices_risk'>
                           <div class="indeterminate"></div>
                         </div>
                     </div>
@@ -160,7 +139,7 @@
                 </li>
                 <li class="collection-item dismissable">
                     <div class="switch">
-                        <label> Monto <input type="checkbox"> <span class="lever"></span> Cantidad </label>
+                        <label> Cantidad <input type="checkbox" ng-model='settings.by_amount' ng-change='alert()'> <span class="lever"></span> Monto </label>
                       </div>
                 </li>
             </ul>
@@ -174,7 +153,7 @@
                   </div>
             </div>
         </div>
-<!--         <div class="col s12 m8 l4">
+        <div class="col s12 m8 l4">
             <div class="card">
                 <div class="sample-chart-wrapper">
                     <span>Top Indicadores por Categorías</span>
@@ -247,14 +226,14 @@
                             <span class="task-cat pink accent-2">P1</span>
                         </div>
                         <div class="col s3">
-                            <div class="progress">
+                            <div class="progress" >
                                  <div class="determinate" style="width: 10%"></div>
                             </div>
                         </div>
                     </div>
                 </li>
             </ul>
-        </div> -->
+        </div>
     </div>
 </div>
 
@@ -271,8 +250,7 @@
 {% endblock %}
 
 {% block scripts%}
-    <script type="text/javascript" src="/static/js/chart_script.js"></script>
-    <script type="text/javascript" src="/static/js/initial_components.js"></script>
+    <!-- <script type="text/javascript" src="/static/js/chart_script.js"></script> -->
     <script>
             // var trendingLineChart = document.getElementById("top-indicadores-categorias").getContext("2d");
             //  new Chart(trendingLineChart, {
@@ -322,283 +300,6 @@
             //     },
             //     options: {}
             // });
-
-            // var labels = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
-            // var initialLabels = labels.slice(0,7);
-
-            // var dataSetData = [
-            //         {
-            //             code : '333',
-            //             label: "UNP UASD",
-            //             backgroundColor : "rgba(128, 222, 234, 0.6)",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(2  55,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#ffffff",
-            //             pointHoverBackgroundColor : "#ffffff",
-            //             pointHoverBorderColor : "#ffffff",
-            //             data: [1, 5, 2, 4, 8, 5, 8]
-            //         },
-            //         {
-            //             code : '160',
-            //             label: "Ave. Tiradentes",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [20, 8, 31, 5, 20, 32, 27]
-            //         },
-            //         {
-            //             code : '164',
-            //             label: "Dirección Gral. Tránsito Terrestre",
-            //             backgroundColor : "rgba(27,133,184, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [31, 48, 38, 21, 14, 42, 1]
-            //         },
-            //         {
-            //             code : '165',
-            //             label: "Plaza Florida",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [39, 9, 35, 47, 18, 14, 17]
-            //         },
-            //         {
-            //             code : '166',
-            //             label: "Plaza Botánika",
-            //             backgroundColor : "rgba(27,133,184, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [44, 13, 4, 46, 50, 48, 1]
-            //         },
-            //         {
-            //             code : '167',
-            //             label: "Lope de Vega ",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [41, 45, 39, 14, 23, 47, 39]
-            //         },
-            //         {
-            //             code : '169',
-            //             label: "Plaza Haché",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [22, 26, 8, 47, 49, 11, 23]
-            //         },
-            //         {
-            //             code : '240',
-            //             label: "Torre",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [2, 2, 42, 46, 26, 1, 30]
-            //         },
-            //         {
-            //             code : '241',
-            //             label: "Plaza Central",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [17, 22, 37, 46, 32, 29, 15]
-            //         },
-            //         {
-            //             code : '261',
-            //             label: "UNP SuperMercado  Nacional 27 de Febrero",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [11, 31, 16, 26, 15, 30, 21]
-            //         },
-            //         {
-            //             code : '330',
-            //             label: "Malecon Center",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [1, 47, 29, 48, 23, 7, 28]
-            //         },
-            //         {
-            //             code : '530',
-            //             label: "Diamond Plaza",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [41, 5, 36, 16, 47, 45, 21]
-            //         },
-            //         {
-            //             code : '580',
-            //             label: "Ave. 27 de Febrero",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [21, 1, 10, 21, 19, 27, 48]
-            //         },
-            //         {
-            //             code : '610',
-            //             label: "UNP La Cancillería",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [15, 26, 36, 33, 15, 18, 37]
-            //         },
-            //         {
-            //             code : '810',
-            //             label: "Blue Mall",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [41, 28, 12, 10, 1, 16, 31]
-            //         },
-            //         {
-            //             code : '820',
-            //             label: "Agora Mall",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [34, 38, 38, 48, 35, 48, 48]
-            //         },
-            //         {
-            //             code : '830',
-            //             label: "Gazcue",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [2, 50, 36, 17, 28, 4, 29]
-            //         },
-            //         {
-            //             code : '840',
-            //             label: "Galeria 360",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [37, 48, 3, 10, 18, 33, 45]
-            //         },
-            //         {
-            //             code : '890',
-            //             label: "UNP Multicentro Jose Contreras",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [26, 26, 26, 30, 13, 23, 45]
-            //         },
-            //         {
-            //             code : '011',
-            //             label: "Independencia",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [4, 18, 45, 47, 38, 42, 42]
-            //         },
-            //         {
-            //             code : '013',
-            //             label: "Máximo Gómez",
-            //             backgroundColor : "rgba(128, 222, 234, 0.3)",
-            //             strokeColor : "#80deea",
-            //             pointRadius : 5,
-            //             borderColor :  "rgba(255,255,255,0.8)",
-            //             pointBackgroundColor : "#00bcd4",
-            //             pointBorderColor : "#fff",
-            //             pointHoverBackgroundColor : "#80deea",
-            //             pointHoverBorderColor : "#80deea",
-            //             data: [17, 38, 46, 40, 49, 17, 32]
-            //         }];
 
             // var initialData = dataSetData.slice(0,3);
             // var selectizeInitialData = initialData.map(dataset => dataset.code);

@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['WAUD-CONTINUA01', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
+    'api.apps.ApiConfig',
     'dashboard.apps.DashboardConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,6 +51,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10
+}
 
 ROOT_URLCONF = 'AudISoft.urls'
 
@@ -80,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.mysql',
         'HOST': 'localhost',
         'USER' : 'root',
-        'NAME' : 'audisoft2'
+        'NAME' : 'audisoft'
     }
 }
 
