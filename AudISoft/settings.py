@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.mysql',
         'HOST': 'localhost',
         'USER' : 'root',
-        'NAME' : 'audisoft'
+        'NAME' : 'audisoft2'
     }
 }
 

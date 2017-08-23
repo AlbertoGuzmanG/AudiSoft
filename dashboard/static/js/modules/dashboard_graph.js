@@ -1,13 +1,15 @@
-var app = angular.module('audit_soft', []);
+var app = angular.module('audit_soft', ['map']);
 
 app.config(['$interpolateProvider', function($interpolateProvider) {
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
 }]);
 
-app.controller('dashboardController', ['$scope', '$http', function(scope, http){
+app.controller('dashboardController', ['$scope', '$http', '$rootScope', function($scope, $http, rootScope){
 
-	scope.settings = { by_amount : true}
+	$scope.indicator_change = function(){
+		rootScope.$broadcast('indicator_type_change', $scope.indicator_type);
+	}
 
 	getOffices().then(loadGraphs);
 
