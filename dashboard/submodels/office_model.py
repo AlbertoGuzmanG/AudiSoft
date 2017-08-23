@@ -63,9 +63,10 @@ class OfficeModel():
 				'code': office.code,
 				'name': office.name,
 				'address': office.address,
-				'schedule': 'ToBe defined', #TODO get this from database
+				'schedule': office.schedule,
 				'region': office.region.name,
-				'location': office.location
+				'location': office.location,
+				'type': office.office_type,
 			}			
 
 			for category_indicator in category_indicators:
@@ -118,5 +119,4 @@ class OfficeModel():
 					'risk': office_object['risk']
 				}	
 
-		pprint(regions)
 		return  {'offices': office_list, 'regions': regions}
