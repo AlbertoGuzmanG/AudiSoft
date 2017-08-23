@@ -25,7 +25,7 @@ SECRET_KEY = 'w%gaqk!m*2l18%w2s1ef+v=8vpm@xzl_o$pkk^y(3dz2hf2yqo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['WAUD-CONTINUA01', 'localhost']
+ALLOWED_HOSTS = ['WAUD-CONTINUA01', 'localhost', 'WAUD-DAC-009']
 
 
 # Application definition
@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.mysql',
         'HOST': 'localhost',
         'USER' : 'root',
-        'NAME' : 'audisoft2'
+        'NAME' : 'audisoft'
     }
 }
 

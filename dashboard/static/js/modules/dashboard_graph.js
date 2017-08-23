@@ -5,10 +5,10 @@ app.config(['$interpolateProvider', function($interpolateProvider) {
   $interpolateProvider.endSymbol(']]');
 }]);
 
-app.controller('dashboardController', ['$scope', '$http', '$rootScope', function($scope, $http, rootScope){
+app.controller('dashboardController', ['$scope', '$http', '$rootScope', function(scope, http, rootScope){
 
-	$scope.indicator_change = function(){
-		rootScope.$broadcast('indicator_type_change', $scope.indicator_type);
+	scope.indicator_change = function(){
+		rootScope.$broadcast('indicator_type_change', scope.indicator_type);
 	}
 
 	getOffices().then(loadGraphs);
