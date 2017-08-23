@@ -4,7 +4,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.dashboard, name='dashboard'),
-    url(r'^data$', views.dashboard_data, name='dashboard_data'),
-    url(r'^office_risk/(?P<indicator_type>\d+)/$$', views.office_risk, name='office_risk'),
+    url(r'^map_offices_risk/(?P<indicator_type>\d+)/$$', views.map_offices_risk, name='map_offices_risk'),
 ]
 

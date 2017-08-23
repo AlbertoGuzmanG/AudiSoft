@@ -1,6 +1,6 @@
 {% extends 'base/base.html'%}
 
-{% block contentt %}
+{% block content %}
 
 <div id="chart-dashboard" ng-controller='dashboardController'>
     <div class="row">
@@ -18,12 +18,14 @@
                             </div>
                         </div>
                         <div class="trending-line-chart-wrapper">
-                            <canvas id="trending-line-chart" height="70"></canvas>
+                            <!-- <canvas id="trending-line-chart" height="70"></canvas> -->
                         </div>
                     </div>
                 </div>
                 <div class="card-content">
                     <a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="mdi-content-add activator"></i></a>
+                            <canvas id="trending-line-chart" height="70"></canvas>
+                    
                     <div class="progress" ng-if='loading.offices_risk'>
                         <div class="indeterminate"></div>
                     </div>
@@ -129,19 +131,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="col s12 m12 l4">
-            <ul id="task-card" class="collection with-header">
-                <li class="collection-header cyan">
-                    <h4 class="task-card-title">Dashboard</h4>
-                    <p class="task-card-date">{% now "F d, Y" %}</p>
-                </li>
-                <li class="collection-item dismissable">
-                    <div class="switch">
-                        <label> Cantidad <input type="checkbox" ng-model='indicator_type' ng-change='indicator_change()'> <span class="lever"></span> Monto </label>
-                      </div>
-                </li>
-            </ul>
         </div>
         <div class="col s12 m8 l6">
             <div class="card">
@@ -255,8 +244,7 @@ Highcharts.chart('indicator-by-region', {
             name: 'ZONA SUROESTE',
             y: 0.91
         }]
-    }]
-});
+    }]});
 
 Highcharts.chart('offices', {
     chart: {
@@ -468,14 +456,14 @@ Highcharts.chart('offices', {
                 ]
             ]
         }]
-    }
-});
+    }});
 
 Highcharts.setOptions({
-    colors: ['#EE2C2C', '#FF4C00', '#FF6300', '#F0E315', '#DFFF00', '#B0FF00', '#00FF01', '#00FF01']
+    colors: ['#EE2C2C', '#FF4C00', '#FF6300', '#F0E315', '#DFFF00', '#B0FF00', '#00FF01', '#00FF01'],
+    borderColor: ['red','red','red','red','red','red','red','red']
 });
 
-c = Highcharts.chart('thermometer', {
+Highcharts.chart('thermometer', {
     chart: {
         type: 'column'
     },
@@ -501,6 +489,7 @@ c = Highcharts.chart('thermometer', {
     legend: {
         enabled: false
     },
+    exporting : false,
     tooltip: {
         pointFormat: 'Population in 2008: <b>{point.y:.1f} millions</b>'
     },
@@ -530,8 +519,7 @@ c = Highcharts.chart('thermometer', {
                 fontFamily: 'Verdana, sans-serif'
             }
         }
-    }]
-});
+    }]});
 
 </script>
 {% endblock %}

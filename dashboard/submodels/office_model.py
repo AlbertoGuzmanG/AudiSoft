@@ -19,7 +19,7 @@ class OfficeModel():
 	#Getting risk by indicator and office
 	def get_indicator_risk_by_office(self, indicators_data):
 		indicators_risk = {}
-		totals = self.sum_by_indicator(indicators_data)		
+		totals = self.sum_by_indicator(indicators_data)
 
 		for indicator in indicators_data:
 			ammount = indicator['amount']
@@ -32,14 +32,14 @@ class OfficeModel():
 				'value': ammount,
 				'percent': (ammount / totals[indicator_id]) * 100,
 				'indicator_id': indicator_id,
-				'office_id' : office_id 
+				'office_id' : office_id
 			}
 
 		return indicators_risk
 
 
 	def get_risk(self, indicator_type):
-		regions = {}		
+		regions = {}
 		office_list = []
 		executions_count = 3 #TODO get this value from config
 
@@ -68,7 +68,7 @@ class OfficeModel():
 				'region': office.region.name,
 				'location': office.location,
 				'type': office.office_type,
-			}			
+			}
 
 			for category_indicator in category_indicators:
 				key = ("{0}_{1}".format(office.id, category_indicator.indicator_id))
@@ -103,7 +103,7 @@ class OfficeModel():
 					}
 
 				categories_risk[category_id]['indicators'].append(indicator_risk.copy())
-				sum_indicator_risk += weight_risk				
+				sum_indicator_risk += weight_risk
 
 			office_object['categories'] = categories_risk
 			office_object['risk'] = sum_indicator_risk
@@ -118,6 +118,6 @@ class OfficeModel():
 					'name': office.region.name,
 					'location': office.region.area[0].coords if office.region.area else '',
 					'risk': office_object['risk']
-				}	
+				}
 
 		return  {'offices': office_list, 'regions': regions}

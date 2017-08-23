@@ -75,7 +75,7 @@
 		}
 
 		var updateMap = function(indicator_type){
-			http.get('/dashboard/office_risk/' + indicator_type, {})
+			http.get('/dashboard/map_offices_risk/' + indicator_type, {})
 			.then(function (res) {
 				load_map(res.data);
 			})

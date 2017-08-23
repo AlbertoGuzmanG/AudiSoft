@@ -8,7 +8,7 @@ from .submodels.office_model import OfficeModel
 def dashboard(request):
 	return render(request,'dashboard/index.html')
 
-def office_risk(request, indicator_type = 1):
+def map_offices_risk(request, indicator_type = 1):
 	res_object = {}
 	risk_information = OfficeModel().get_risk(indicator_type)
 
@@ -60,11 +60,3 @@ def office_risk(request, indicator_type = 1):
 		})
 
 	return JsonResponse({'offices': offices, 'regions': regions}, safe=False)
-
-def dashboard_data(request):
-	res_object = {}
-	res_object['top_ten_indicator'] = Dashboard.get_view('top_ten_indicator')
-	res_object['incidents_by_category'] = Dashboard.get_view('incidents_by_category')
-	res_object['indicators_behaviour_last_y'] = Dashboard.get_view('indicators_behaviour_last_y')
-	res_object['indicators_behaviour_last_y'] = Dashboard.get_view('indicators_behaviour_last_y')
-	return JsonResponse(res_object, safe=False)

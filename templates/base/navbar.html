@@ -8,15 +8,38 @@
     </li>
     <li>
         <a href="/static/app-email.html" class="cyan-text">
-            <i class="mdi-communication-email"></i>
-            <span>Notificaciones</span>
+            <i class="mdi-action-description"></i>
+            <span>Oficinas</span>
         </a>
     </li>
     <li>
+        <a href="/static/app-email.html" class="cyan-text">
+            <i class="mdi-action-description"></i>
+            <span>Indicadores</span>
+        </a>
+    </li>
+    <li>
+        <a href="/static/app-email.html" class="cyan-text">
+            <i class="mdi-action-description"></i>
+            <span>Regiones</span>
+        </a>
+    </li>
+    <li>
+        <a href="/static/app-email.html" class="cyan-text">
+            <i class="mdi-action-description"></i>
+            <span>Comparativos</span>
+        </a>
+    </li>
+    <li style="margin-left: 40px;">
         <a class="dropdown-menu cyan-text" href="/admin">
             <i class="mdi-action-settings"></i>
             <span>Administración</span>
         </a>
+    </li>
+    <li style="position: absolute; right: 4%">
+        <div class="switch">
+            <label> Cantidad <input type="checkbox" ng-model='indicator_type' ng-change='indicator_change()'> <span class="lever"></span> Monto </label>
+        </div>
     </li>
 
   </ul>
