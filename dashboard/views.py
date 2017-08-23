@@ -8,32 +8,58 @@ from .submodels.office_model import OfficeModel
 def dashboard(request):
 	return render(request,'dashboard/index.html')
 
-def office_risk(request):
+def office_risk(request, indicator_type = 1):
 	res_object = {}
-	risk_information = OfficeModel().get_risk(1)
+	risk_information = OfficeModel().get_risk(indicator_type)
 
 	offices = []
+	regions = []
 	for office in risk_information['offices']:
-
 		offices.append({
-			"type": "Feature",
-			"properties": {
-				"Y": office['location'][1],
-				"X": office['location'][0],
-				"info": {
+			"type":"Feature",
+			"properties":{
+				"Y":office['location'][0],
+				"X":office['location'][1],
+				"region":office['region'],
+				'risk': office['risk'],
+				"info":{
 					"code": {"label": "Código", "value": office['code']},
 					"address": {"label": "Dirección", "value": office['address']},
 					"schedule": {"label": "Horario", "value": office['schedule']},
 					"office_name": {"label": "Oficina", "value": office['name']},
 					"region": {"label": "Región", "value": office['region']},
-					"type": {"label": "Tipo", "value": "SUC"},
-					'info': office['categories'],
-					'risk': office['risk']
+					"type": {"label": "Tipo", "value":  office['type']},
+					"risk": {"label": "Riesgo", "value": office['risk']},
 				}
+			},
+			"geometry":{
+				"type":"Point",
+				"coordinates":[office['location'][1], office['location'][0]]
 			}
 		})
 
-	return JsonResponse({'offices': offices}, safe=False)
+	for index in risk_information['regions']:
+		region = risk_information['regions'][index]
+		regions.append({
+		    "type": "Feature",
+		    "properties": {
+		      "id": region['id'],      
+		      "info": {
+		        "region_name": {"label": "Región","value": region['name']},
+		        "clients_count": {"label": "Clientes","value": " 340 "},
+		        "risk": {"label": "Riesgo","value": region['risk']
+		        }		        
+		      }
+		    },
+		    "geometry": {
+		      "type": "Polygon",
+		      "coordinates": [
+		          region['location']
+		      ]
+		    }
+		})
+
+	return JsonResponse({'offices': offices, 'regions': regions}, safe=False)
 
 def dashboard_data(request):
 	res_object = {}

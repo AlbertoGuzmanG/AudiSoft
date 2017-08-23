@@ -2,10 +2,18 @@ var MapView = function(scope, object_name) {
 	var current_position = {lat:0, long:0};
 	var office_layer = null;
 
+	var getLevel = function(value){
+		values = {low: 30, medium: 55, high: 100};
+		for(var level in values){
+			if(value <= values[level])
+				return level;
+		}
+	}
+
 	//Setting popup 
 	var container = document.getElementById('popup');
-	var content = document.getElementById('ul-popup-content');
 	var closer = document.getElementById('popup-closer');
+	var content = document.getElementById('ul-popup-content');
 
 	//Getting Rep. Dom. center vier
 	var view = new ol.View({
@@ -50,22 +58,11 @@ var MapView = function(scope, object_name) {
 
 	//Getting region color
 	var getRegionColor = function(feature, value) {
-		var regionColor = "rgba(154, 207, 145,0.64)";
-		switch(value){
-			case '4':
-			case '10':
-			case '9':
-				regionColor = "rgba(217, 31, 31,0.64)";
-				break;	
-			case '11':
-			case '6':
-			case '1':
-				regionColor = "rgba(250, 227, 131,0.64)";
-				break;	
-		}
-
+		var region_object = feature.U;
+		var colors = {low: "rgba(154, 207, 145,0.64)", medium:"rgba(250, 227, 131,0.64)", high: "rgba(217, 31, 31,0.64)"};
+		var color = colors[getLevel(region_object.info.risk.value)];
 	    return [ new ol.style.Style({
-	        stroke: new ol.style.Stroke({color: "rgba(0,0,0,0.64)", lineDash: null, lineCap: 'butt', lineJoin: 'miter', width: 0}), fill: new ol.style.Fill({color: regionColor})
+	        stroke: new ol.style.Stroke({color: "rgba(0,0,0,0.64)", lineDash: null, lineCap: 'butt', lineJoin: 'miter', width: 0}), fill: new ol.style.Fill({color: color})
 	    })];                
 	};
 
@@ -120,12 +117,18 @@ var MapView = function(scope, object_name) {
 	var size = 0;
 	var office_style={}
 	var getOfficeStyle = function(feature, resolution){
+		var office_object = feature.U;
+
+		var colors = {low: "rgba(72,121,86,1.0)", medium: "rgba(246, 218, 109, 0.9)", high: "rgba(225, 26, 26, 0.85)"};
+		var color = colors[getLevel(office_object.risk)];
+
 	    var value = ""
 	    var size = 0;
 	    var style = [ new ol.style.Style({
 	        image: new ol.style.Circle({radius: 8.0 + size,
-	            stroke: new ol.style.Stroke({color: "rgba(0,0,0,1.0)", lineDash: null, lineCap: 'butt', lineJoin: 'miter', width: 0}), fill: new ol.style.Fill({color: "rgba(72,121,86,1.0)"})})
+	            stroke: new ol.style.Stroke({color: "rgba(0,0,0,1.0)", lineDash: null, lineCap: 'butt', lineJoin: 'miter', width: 0}), fill: new ol.style.Fill({color: color})})
 	    })];
+
 	    if ("" !== null) {
 	        var labelText = String("");
 	    } else {
@@ -180,8 +183,9 @@ var MapView = function(scope, object_name) {
 
 	$(map.getViewport()).on("dblclick", function(e) {
 	    map.forEachFeatureAtPixel(map.getEventPixel(e), function (feature, layer) {
-
 	       map.getView().setCenter( [current_position.lat, current_position.long]);
+	       setOffices(feature.U.info.region_name.value);
+	       console.log(feature.U.info.region_name.value);
 	       map.getView().setZoom(10);
 	    });
 	});
@@ -223,10 +227,6 @@ var MapView = function(scope, object_name) {
 
 		var info = document.getElementById('info');
 
-		if(feature){
-			console.log(feature.U['._REGION']);        	
-		}
-
 		if (feature !== highlight) {
 		  if (highlight) {
 		    featureOverlay.getSource().removeFeature(highlight);
@@ -247,7 +247,6 @@ var MapView = function(scope, object_name) {
 
 		current_position = {lat:evt.coordinate[0], long:evt.coordinate[1]};
 		var pixel = map.getEventPixel(evt.originalEvent);
-		//console.log(evt.coordinate);
 		displayFeatureInfo(pixel);
 	});
 
@@ -256,13 +255,12 @@ var MapView = function(scope, object_name) {
 	    map.getView().setZoom(zoom);
 	};
 
-	var showRegion = function(region){
-
+	var setOffices = function(region_name){
 		if(office_layer){
 			map.removeLayer(office_layer);
 		}
 
-		officeData = scope.offices.filter(function(e){ if(e.properties.REGION == region.name) return e});
+		officeData = scope.offices.filter(function(e){ if(e.properties.region.trim() == region_name.trim()) return e});
 
 		var offices_location = {
 			"type": "FeatureCollection",
@@ -283,13 +281,17 @@ var MapView = function(scope, object_name) {
 		});
 
 		map.addLayer(office_layer);
+	}
+
+	var showRegion = function(region){
+		setOffices(region.name);
 		centerMap(region.center_coords, region.zoom);
 	}
 
 	var popup = function(info, location){
 		var popup_content = '';
 
-		console.log(info, location);
+		//console.log(info, location);
 
 		for (key in info) {
 			popup_content += '<li class="collection-item" ><text><b>' + info[key].label +': </b> <span>' + info[key].value +'</span></text></li>';
