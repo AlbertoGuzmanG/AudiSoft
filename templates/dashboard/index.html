@@ -4,139 +4,11 @@
 
 <div id="chart-dashboard" ng-controller='dashboardController'>
     <div class="row">
-        <div class="col s12 m8 l8">
-            <div class="card">
-                <div class="card-move-up waves-effect waves-block waves-light">
-                    <div class="move-up cyan darken-1">
-                        <div>
-                            <span class="chart-title white-text">RIESGO POR OFICINA</span>
-                            <div class="switch chart-revenue-switch right">
-                                <select id="select-state" placeholder="Dime cuales sucursales quieres comparar..">
-                                    <option value="">Sucursal..</option>
-                                </select>
-                                <button id="filter-btn" class="btn waves-effect waves-light cyan darken-2">Filtrar</button>
-                            </div>
-                        </div>
-                        <div class="trending-line-chart-wrapper">
-                            <!-- <canvas id="trending-line-chart" height="70"></canvas> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="mdi-content-add activator"></i></a>
-                            <canvas id="trending-line-chart" height="70"></canvas>
-                    
-                    <div class="progress" ng-if='loading.offices_risk'>
-                        <div class="indeterminate"></div>
-                    </div>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Revenue by Month <i class="mdi-navigation-close right"></i></span>
-                    <table class="responsive-table">
-                        <thead>
-                            <tr>
-                                <th data-field="id">ID</th>
-                                <th data-field="month">Month</th>
-                                <th data-field="item-sold">Item Sold</th>
-                                <th data-field="item-price">Item Price</th>
-                                <th data-field="total-profit">Total Profit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>January</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>February</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>March</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>April</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>May</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>June</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>July</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>August</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Septmber</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>Octomber</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>November</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>December</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
         <div class="col s12 m8 l6">
             <div class="card">
                 <div class="sample-chart-wrapper">
                     <span>Top Oficinas Por Categorias de Indicadores </span>
-                    <div id="offices" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
+                    <!-- <div id="offices" style="min-width: 300px; height: 400px; margin: 0 auto"></div> -->
                 </div>
             </div>
         </div>
@@ -144,7 +16,7 @@
             <div class="card">
                 <div class="sample-chart-wrapper">
                     <span>TOP Oficinas Mayor riesgo</span>
-                    <div id="indicator-by-region" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                    <!-- <div id="indicator-by-region" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div> -->
                 </div>
             </div>
         </div>
@@ -152,13 +24,32 @@
             <div class="card">
                 <div class="sample-chart-wrapper">
                     <span>TERMOMETRO DE OFICINAS</span>
-                    <div id="thermometer" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                    <!-- <div id="thermometer" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div> -->
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<div id="work-collections">
+    <div class="row">
+        <div class="col s12 m12 l6">
+            <ul id="issues-collection" class="collection">
+                <li class="collection-item avatar">
+                    <i class="mdi-action-bug-report circle red darken-2"></i>
+                    <span class="collection-header">Issues</span>
+                    <p>Assigned to you</p>
+                    <a href="index.html#" class="secondary-content"><i class="mdi-action-grade"></i></a>
+                </li>
+                <li class="collection-item">
+                    <div class="row">
+                        <div id="indicator-by-region" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 <div class="row" ng-controller='map_view'>
     <div class="col s12 m12">
         <div class="card" style="padding:2px 13px 2px 13px">
@@ -176,6 +67,13 @@
 
 <script type="text/javascript">
 
+
+Highcharts.setOptions({
+    colors: ['rgba(20,20,20,0.3)', '#FF4C00', '#FF6300', '#F0E315', '#DFFF00', '#B0FF00', '#00FF01', '#00FF01'],
+    borderColors: ['red','red','red','red','red','red','red','red']
+});
+
+
 Highcharts.chart('indicator-by-region', {
     chart: {
         plotBackgroundColor: null,
@@ -183,6 +81,7 @@ Highcharts.chart('indicator-by-region', {
         plotShadow: false,
         type: 'pie'
     },
+    exporting : false,
     title: {
         text: ''
     },
@@ -245,10 +144,16 @@ Highcharts.chart('indicator-by-region', {
             y: 0.91
         }]
     }]});
-
+/*
 Highcharts.chart('offices', {
     chart: {
-        type: 'column'
+        type: 'column',
+        events : {
+            drilldown : function (e) {
+                this.addSeriesAsDrilldown(e.point, { name : 'etst', data : [['aa', 1]]});
+            }
+    }
+
     },
     title: {
         text: ''
@@ -281,38 +186,15 @@ Highcharts.chart('offices', {
     },
 
     series: [{
-        name: 'Categorías de Indicadores',
-        colorByPoint: true,
-        data: [{
-            name: 'Boulevard',
-            y: 56.33,
-            drilldown: 'Boulevard'
-        }, {
-            name: 'Cruce de Veron',
-            y: 24.03,
-            drilldown: 'Cruce de Veron'
-        }, {
-            name: 'Las Palmas',
-            y: 10.38,
-            drilldown: 'Las Palmas'
-        }, {
-            name: 'Coral Mall',
-            y: 4.77,
-            drilldown: 'Coral Mall'
-        }, {
-            name: 'Blue Mall',
-            y: 0.91,
-            drilldown: 'Blue Mall'
-        }, {
-            name: 'Agora Mall',
-            y: 0.2,
-            drilldown: 'Agora Mall'
-        }]
+        name : 'Oficinas',
+        colorByPoint : true,
+        data : [{"name":"Boulevard","y":60,"drilldown":"51"},{"name":"Las Palmas","y":40,"drilldown":"93"}]
+
     }],
-    drilldown: {
+    /* drilldown: {
         series: [{
             name: 'Boulevard',
-            id: 'Boulevard',
+            id: '51',
             data: [
                 [
                     'Indicador 01',
@@ -341,7 +223,7 @@ Highcharts.chart('offices', {
             ]
         }, {
             name: 'Cruce de Veron',
-            id: 'Cruce de Veron',
+            id: '93',
             data: [
                 [
                     'Indicador 01',
@@ -458,11 +340,6 @@ Highcharts.chart('offices', {
         }]
     }});
 
-Highcharts.setOptions({
-    colors: ['#EE2C2C', '#FF4C00', '#FF6300', '#F0E315', '#DFFF00', '#B0FF00', '#00FF01', '#00FF01'],
-    borderColor: ['red','red','red','red','red','red','red','red']
-});
-
 Highcharts.chart('thermometer', {
     chart: {
         type: 'column'
@@ -520,6 +397,6 @@ Highcharts.chart('thermometer', {
             }
         }
     }]});
-
+*/
 </script>
 {% endblock %}

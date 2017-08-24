@@ -5,20 +5,31 @@ app.config(['$interpolateProvider', function($interpolateProvider) {
   $interpolateProvider.endSymbol(']]');
 }]);
 
-app.controller('dashboardController', ['$scope', '$http', '$rootScope', function(scope, http, rootScope){
+app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', function(scope, http, rootScope, q){
 
 	scope.indicator_change = function(){
 		rootScope.$broadcast('indicator_type_change', scope.indicator_type);
 	}
 
-	getOffices().then(loadGraphs);
+	var getOffices = http.get('/api/offices');
+	var getOfficesRisk = http.get('/dashboard/api/offices_risk/1');
 
-	function getOffices() {
-		return http.get('/api/offices')
-			.then((response) => {
-				scope.offices = response.data;
-			});
+	q.all([getOffices, getOfficesRisk])
+		.then((values) => {
+			scope.offices = values[0].data;
+			scope.office_risk = values[1].data;
+
+			graph_1();
+		});
+
+
+	function graph_1() {
+		var risky_offices = scope.office_risk.offices.filter((a) => a.risk > 0 );
+		var chartData = risky_offices.map(function(office) { return { name : office.name, y : office.risk, drilldown: office.code } })
+
+		offices_chart.series[0].setData(chartData);
 	}
+
 
 	function getTrendingLineCharData() {
 		fillTrendingLineChar();
