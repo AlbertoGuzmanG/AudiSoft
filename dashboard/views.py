@@ -8,6 +8,11 @@ from .submodels.office_model import OfficeModel
 def dashboard(request):
 	return render(request,'dashboard/index.html')
 
+
+def offices_risk(request, indicator_type):
+	risk_information = OfficeModel().get_risk(indicator_type)
+	return JsonResponse(risk_information, safe=False)
+	
 def map_offices_risk(request, indicator_type = 1):
 	res_object = {}
 	risk_information = OfficeModel().get_risk(indicator_type)
