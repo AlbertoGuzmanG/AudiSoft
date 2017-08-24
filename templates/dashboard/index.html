@@ -2,7 +2,212 @@
 
 {% block content %}
 
-<div id="chart-dashboard" ng-controller='dashboardController'>
+<div class="row" ng-controller='map_view'>
+    <div class="col s12 m12">
+        <div class="card" style="padding:2px 13px 2px 13px">
+            {% include 'dashboard/map_view.html'%}
+        </div>
+    </div>
+</div>
+
+
+<div id="card-stats">
+                        <div class="row">
+                            <div class="col s12 m6 l4">
+                                <div class="card">
+                                    <div class="card-content  green white-text">
+                                        <p class="card-stats-title"><i class="mdi-action-home"></i> Oficina</p>
+                                        <h4 class="card-stats-number">Isabel la Católica 45%</h4>
+                                        <p class="card-stats-compare"><span class="green-text text-lighten-5">Últimas 3 ejecuciones</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l4">
+                                <div class="card">
+                                    <div class="card-content blue-grey white-text">
+                                        <p class="card-stats-title"><i class="mdi-action-group-work"></i> Categoría</p>
+                                        <h4 class="card-stats-number">Préstamos 44%</h4>
+                                        <p class="card-stats-compare"><span class="purple-text text-lighten-5">Últimas 3 ejecuciones</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>                            
+                            <div class="col s12 m6 l4">
+                                <div class="card">
+                                    <div class="card-content pink lighten-2 white-text">
+                                        <p class="card-stats-title"><i class="mdi-action-dashboard"></i> Indicador</p>
+                                        <h4 class="card-stats-number">Deterioro de la cartera 36%</h4>
+                                        <p class="card-stats-compare"><span class="deep-purple-text text-lighten-5">Últimas 3 ejecuciones</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+<div id="work-collections">
+                        <div class="row">
+                            <div class="col s12 m12 l6">
+                                <ul id="issues-collection" class="collection">
+                                    <li class="collection-item avatar">
+                                        <i class="mdi-action-home circle red darken-2"></i>
+                                        <span class="collection-header">Oficinas con mayor cantidad de incidencias</span>
+                                        <p>Evaluación por categoría de indicadores</p>
+                                    </li>
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s7">
+                                                <p class="collections-title"><strong>#010</strong> Isabel La Católica</p>
+                                                <p class="collections-content">2,500 incidencias</p>
+                                            </div>
+                                            <div class="col s2">
+                                                <span class="task-cat pink accent-2">40%</span>
+                                            </div>
+                                            <div class="col s3">
+                                                <div class="progress">
+                                                     <div class="determinate" style="width: 60%"></div>   
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s7">
+                                                <p class="collections-title"><strong>#015</strong> Padre Castellanos</p>
+                                                <p class="collections-content">2,000 incidencias </p>
+                                            </div>
+                                            <div class="col s2">
+                                                <span class="task-cat yellow darken-4">35%</span>
+                                            </div>
+                                            <div class="col s3">
+                                                <div class="progress">
+                                                    <div class="determinate" style="width: 40%"></div>   
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s7">
+                                                <p class="collections-title"><strong>#205</strong> Multicentro La Sirena San Cristobal</p>
+                                                <p class="collections-content">2,200 incidencias </p>
+                                            </div>
+                                            <div class="col s2">                                                
+                                                <span class="task-cat light-green darken-3">23%</span>
+                                            </div>
+                                            <div class="col s3">
+                                                <div class="progress">
+                                                    <div class="determinate" style="width: 95%"></div>   
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s7">
+                                                <p class="collections-title"><strong>#188</strong> Eusebio Manzueta</p>
+                                                <p class="collections-content">1,300 incidencias </p>
+                                            </div>
+                                            <div class="col s2">
+                                                <span class="task-cat pink accent-2">30%</span>
+                                            </div>
+                                            <div class="col s3">
+                                                <div class="progress">
+                                                     <div class="determinate" style="width: 10%"></div>   
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <div class="col s12 m12 l6">
+                                <ul id="issues-collection" class="collection">
+                                    <li class="collection-item avatar">
+                                        <i class="mdi-action-group-work circle blue darken-2"></i>
+                                        <span class="collection-header">Categorías más destacadas</span>
+                                        <p>Evaluación por indicadores</p>
+                                    </li>
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s7">
+                                                <p class="collections-title"><strong>Préstamos</strong></p>
+                                                <p class="collections-content">1,150 incidencias </p>
+                                            </div>
+                                            <div class="col s2">
+                                                <span class="task-cat pink accent-2">30%</span>
+                                            </div>
+                                            <div class="col s3">
+                                                <div class="progress">
+                                                     <div class="determinate" style="width: 70%"></div>   
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s7">
+                                                <p class="collections-title"><strong>Cuentas de ahorro/corriente</strong></p>
+                                                <p class="collections-content">1,000 incidencias</p>
+                                            </div>
+                                            <div class="col s2">
+                                                <span class="task-cat yellow darken-4">40%</span>
+                                            </div>
+                                            <div class="col s3">
+                                                <div class="progress">
+                                                    <div class="determinate" style="width: 40%"></div>   
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s7">
+                                                <p class="collections-title"><strong>Tarjetas de crédito</strong></p>
+                                                <p class="collections-content">900 incidencias</p>
+                                            </div>
+                                            <div class="col s2">                                                
+                                                <span class="task-cat light-green darken-3">15%</span>
+                                            </div>
+                                            <div class="col s3">
+                                                <div class="progress">
+                                                    <div class="determinate" style="width: 95%"></div>   
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s7">
+                                                <p class="collections-title"><strong>Certificados</strong></p>
+                                                <p class="collections-content">900 incidencias</p>
+                                            </div>
+                                            <div class="col s2">
+                                                <span class="task-cat pink accent-2">15%</span>
+                                            </div>
+                                            <div class="col s3">
+                                                <div class="progress">
+                                                     <div class="determinate" style="width: 10%"></div>   
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>  
+
+
+
+
+
+
+
+
+<div ng-controller='dashboardController'>
     <div class="row">
         <div class="col s12 m8 l8">
             <div class="card">
@@ -159,13 +364,10 @@
     </div>
 </div>
 
-<div class="row" ng-controller='map_view'>
-    <div class="col s12 m12">
-        <div class="card" style="padding:2px 13px 2px 13px">
-            {% include 'dashboard/map_view.html'%}
-        </div>
-    </div>
-</div>
+
+
+
+
 
 <script type="text/javascript" src="/static/js/modules/map_view.js"></script>
 
