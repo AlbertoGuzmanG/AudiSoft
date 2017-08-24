@@ -1,6 +1,8 @@
 # add/extend django features
 from django.http import HttpResponse
+import datetime
 import simplejson
+from django.contrib.gis.geos.point import Point
 
 def default_json_encoder(o) :
     if isinstance(o, datetime.datetime):
@@ -19,6 +21,8 @@ def default_json_encoder(o) :
         if o.microsecond:
             r = r[:12]
         return r
+    elif isinstance(o, Point):
+        return o.coords
     else:
         raise TypeError(repr(o) + ' is not JSON serializable')
 
