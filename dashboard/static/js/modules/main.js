@@ -2,6 +2,11 @@
 	angular.module('map', [])
 	.controller('map_view', ['$scope', '$http', function(scope, http){
 
+		var loading = {
+			show : function() { scope.loading = true},
+			hide : function() { scope.loading = false}
+		};
+
 		var load_map = function(data){
 			scope.offices = data.offices;
 			scope.regions = data.regions;
@@ -75,13 +80,15 @@
 		}
 
 		var updateMap = function(indicator_type){
+			loading.show();
 			http.get('/dashboard/api/map_offices_risk/' + indicator_type, {})
 			.then(function (res) {
 				load_map(res.data);
 			})
 			.catch(function (error) {
 				console.log('Error trying to load map data');
-			});			
+			})
+			.finally(function () {loading.hide();})
 		}
 
 		scope.$on('indicator_type_change', function(event, indicator_type) {

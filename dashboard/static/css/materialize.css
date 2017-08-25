@@ -2296,6 +2296,9 @@ td, th {
     padding: 10px 20px;
     margin: 0;
     border-bottom: 1px solid #e0e0e0; }
+    .collection .collection-item .title {
+      cursor: pointer;
+    }
     .collection .collection-item.avatar {
       height: 84px;
       padding-left: 72px;

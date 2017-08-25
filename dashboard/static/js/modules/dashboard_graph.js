@@ -5,71 +5,116 @@ app.config(['$interpolateProvider', function($interpolateProvider) {
   $interpolateProvider.endSymbol(']]');
 }]);
 
-app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', function(scope, http, rootScope, q){
-
+app.controller('navegationController', ['$scope', '$http', '$rootScope', '$q', function(scope, http, rootScope, q){
 	scope.indicator_change = function(){
 		rootScope.$broadcast('indicator_type_change', scope.indicator_type);
 	}
+}]);
 
-	var getOffices = http.get('/api/offices');
-	var getOfficesRisk = http.get('/dashboard/api/offices_risk/1');
+app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', '$timeout', function(scope, http, rootScope, q, timeout){
 
-	q.all([getOffices, getOfficesRisk])
-		.then((values) => {
-			scope.offices = values[0].data;
-			scope.office_risk = values[1].data;
+	scope.resume_box = {};
+	scope.settings = { indicator_type : 1};
+	scope.loading = { offices : false, regions : false, categories : false};
 
-			graph_1();
+	var getOffices = () => http.get('/api/offices');
+	var getOfficesRisk = () => http.get('/dashboard/api/offices_risk/' + scope.settings.indicator_type).finally(() => loading.hide.all());
+
+	scope.$on('indicator_type_change', function(event, indicator_type) {
+		scope.settings.indicator_type = (indicator_type) ? 1 : 2;
+		updateData();
+	});
+
+	var getCategoriesFromOffice = (office) => $.map(office.categories, function(value, index) { return [value];}); // office.categories object to array
+
+	var processResponse = function (values) {
+		scope.offices = values[0].data;
+		scope.office_risk = values[1].data;
+
+		scope.resume_box.offices = setOfficesRiskData(scope.office_risk);
+		scope.resume_box.categories = setCategoriesData(scope.office_risk);
+	}
+
+	function setCategoriesData(offices_risk) {
+		offices_risk = offices_risk.offices.filter((a) => a.risk > 0 );
+		var category_sum = [];
+
+		offices_risk.forEach(office => {
+			var categories = getCategoriesFromOffice(office);
+			var total_incidences = 0;
+
+			categories.forEach((category) => {
+				var indicators = [];
+				category.indicators.forEach((indicator) => {
+					if (indicators.map(a => a.indicator_id).indexOf(indicator.indicator_id) == -1) {
+						indicators.push(indicator);
+					}
+				});
+				category.total_incidences = indicators.map(a => a.value).reduce((a,b) => a + b)
+			});
+
+
+			categories.forEach(category => {
+				var category_index = category_sum.map(a => a.id).indexOf(category.id);
+				if (category_index == -1) {
+					category_sum.push(category);
+				} else {
+					category_sum[category_index].total_incidences += category.total_incidences;
+				}
+			});
+		});
+		return category_sum;
+	}
+
+	function setOfficesRiskData(offices_risk) {
+
+		var office_risk = offices_risk.offices.filter((a) => a.risk > 0 );
+		office_risk.forEach(office => {
+			office.total_incidences = totalizeIncidencesByOffice(office)
+			office.risk_level = universal.getLevel(office.risk);
+		});
+		office_risk = office_risk.sort((a,b) => a.risk < b.risk).splice(0, 5);
+		return office_risk;
+	}
+
+	function totalizeIncidencesByOffice(office) {
+
+		var categories =  getCategoriesFromOffice(office);
+		var total_incidences = 0;
+		var indicators = [];
+
+		categories.forEach((category) => {
+			category.indicators.forEach((indicator) => {
+				if (indicators.map(a => a.indicator_id).indexOf(indicator.indicator_id) == -1) {
+					indicators.push(indicator);
+				}
+			});
 		});
 
-
-	function graph_1() {
-		var risky_offices = scope.office_risk.offices.filter((a) => a.risk > 0 );
-		var chartData = risky_offices.map(function(office) { return { name : office.name, y : office.risk, drilldown: office.code } })
-
-		offices_chart.series[0].setData(chartData);
+		var total_incidences = indicators.map(a => a.value).reduce((a,b) => a + b)
+		return total_incidences;
 	}
 
-
-	function getTrendingLineCharData() {
-		fillTrendingLineChar();
+	function updateData() {
+		loading.show.all();
+		q.all([getOffices(), getOfficesRisk()]).then(processResponse);
 	}
 
-	function loadGraphs(){
-		fillSelectizeOfficesControl();
-		getTrendingLineCharData();
+	var loading = {
+		show : {
+			offices : () => scope.loading.offices = true,
+			categories : () => scope.loading.categories = true,
+			regions : () => scope.loading.regions = true,
+			all : function() { Object.keys(this).forEach((k) => { scope.loading[k] = true})}
+		},
+		hide : {
+			offices : () => scope.loading.offices = false,
+			categories : () => scope.loading.categories = false,
+			regions : () => scope.loading.regions = false,
+			all : function() { Object.keys(this).forEach((k) => { scope.loading[k] = false})}
+		}
 	}
 
-	function fillSelectizeOfficesControl() {
-		var selectize = $('#select-state')[0].selectize;
+	updateData();
 
-		scope.offices.forEach((office) =>{
-			selectize.addOption({ value : office.code, text : office.name});
-		});
-	}
-
-	function fillTrendingLineChar() {
-		officesRiskChart([{ label: "Isabel La Catolica", code : "10", data: [190, 46, 2, 138, 196, 155, 168] },
-			{ label: "Independencia", code : "11", data: [67, 133, 17, 67, 26, 175, 8] },
-			{ label: "Aeropuerto", code : "12", data: [11, 130, 159, 3, 36, 32, 134] },
-			{ label: "Maximo Gomez", code : "13", data: [81, 48, 135, 94, 135, 176, 28] },
-			{ label: "Padre Castellanos", code : "15", data: [170, 197, 71, 113, 200, 198, 143] },
-			{ label: "Los Mina", code : "16", data: [61, 198, 153, 183, 48, 77, 133] },
-			{ label: "Las Americas", code : "17", data: [143, 94, 108, 83, 6, 169, 68] },
-			{ label: "Ave. Mella", code : "20", data: [116, 125, 105, 152, 41, 136, 70] },
-			{ label: "Ave. Duarte", code : "21", data: [135, 73, 46, 17, 191, 76, 110] },
-			{ label: "Eusebio Manzueta", code : "22", data: [15, 119, 22, 28, 30, 113, 36] },
-			{ label: "Ave. Mexico", code : "23", data: [14, 85, 145, 182, 121, 145, 9] },
-			{ label: "Ave. San Martin", code : "30", data: [188, 196, 95, 97, 19, 96, 133] },
-			{ label: "Nicolas de Ovando", code : "31", data: [109, 139, 45, 197, 143, 126, 58] },
-			{ label: "Monte Plata", code : "32", data: [9, 47, 105, 53, 3, 74, 136] },
-			{ label: "Villa Mella", code : "33", data: [189, 110, 5, 90, 41, 198, 108] },
-			{ label: "Barahona", code : "40", data: [116, 3, 87, 84, 91, 79, 106] },
-			{ label: "Pedernales", code : "41", data: [108, 101, 111, 95, 135, 103, 78] },
-			{ label: "Jimani", code : "44", data: [126, 176, 115, 98, 196, 13, 199] },
-			{ label: "Neyba", code : "45", data: [121, 77, 114, 182, 122, 112, 85] },
-			{ label: "La Vega Real", code : "50", data: [121, 15, 191, 59, 169, 104, 170] },
-			{ label: "Jarabacoa", code : "51", data: [60, 148, 3, 136, 93, 35, 196] },
-			{ label: "Constanza", code : "52", data: [19, 5, 147, 73, 37, 28, 52] }]);
-	}
 }]);
