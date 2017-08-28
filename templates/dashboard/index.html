@@ -30,7 +30,6 @@
                                         <h4 class="card-stats-number">Préstamos 44%</h4>
                                         <p class="card-stats-compare"><span class="purple-text text-lighten-5">Últimas 3 ejecuciones</span>
                                         </p>
-                                        <div class="progress" ng-show='loading.info_box'><div class="indeterminate"></div></div>
                                     </div>
                                 </div>
                             </div>
@@ -68,8 +67,8 @@
                                 <span class="task-cat" ng-class='{ "pink accent-2" : off.risk_level == "high", "yellow darken-3" : off.risk_level == "medium", "green darken-3" : off.risk_level == "low"}'>[[off.risk]]%</span>
                             </div>
                             <div class="col s3">
-                                <div class="progress" >
-                                     <div class="determinate" style="width: [[off.risk]]%"></div>
+                                <div class="progress">
+                                    <div class="determinate" style="width: [[off.risk]]%"></div>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +78,9 @@
                     <li class="collection-item" ng-show='loading.offices'>
                         <div class="row">
                             <div class="col s12">
-                                <div class="progress"><div class="indeterminate"></div></div>
+                                <div class="progress">
+                                    <div class="indeterminate"></div>
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -112,7 +113,9 @@
                     <li class="collection-item" ng-show='loading.categories'>
                         <div class="row">
                             <div class="col s12">
-                                <div class="progress"><div class="indeterminate"></div></div>
+                                <div class="progress">
+                                    <div class="indeterminate"></div>
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -120,55 +123,55 @@
                 </ul>
             </div>
         </div>
-                    </div>
-</div>
-
-
-<div id="work-collections">
-                        <div class="row" style="backgroud:#f00">
-                            <div class="col s12 m12 l6">
-                                <ul id="issues-collection" class="collection">
-                                    <li class="collection-item ">
-                                        <span class="collection-header">Categoría de indicadores por Oficinas</span>
-                                    </li>
-                                    <li>
-                                        <div id="morris-radar-chart" class="section">
-                                          <div class="row">
-                                            <div class="col s12 m12 19">
-                                                  <div class="sample-chart-wrapper">
-                                                    <canvas id="line-chart-sample" height="170px"></canvas>
-                                                  </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                    </li>
-                                </ul>
-
-                            </div>
-
-                                                      <div class="col s12 m12 l6">
-                                <ul id="issues-collection" class="collection">
-                                    <li class="collection-item ">
-                                        <span class="collection-header">Incidencias por regiones</span>
-                                    </li>
-                                    <li>
-                                        <div id="morris-radar-chart" class="section">
-                                          <div class="row">
-                                            <div class="col s12 m12 19">
-                                                  <div class="sample-chart-wrapper">
-                                                    <canvas id="doughnut-chart" height="170px"></canvas>
-                                                  </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                    </li>
-                                </ul>
-
+    </div>
+    <div id="work-collections">
+        <div class="row" style="backgroud:#f00">
+            <div class="col s12 m12 l6">
+                <ul id="issues-collection" class="collection">
+                    <li class="collection-item ">
+                        <span class="collection-header">Categoría de indicadores por Oficinas</span>
+                    </li>
+                    <li>
+                        <div id="morris-radar-chart" class="section">
+                            <div class="row">
+                                <div class="col s12 m12 19">
+                                    <div class="sample-chart-wrapper">
+                                        <canvas id="line-chart-sample" height="170px"></canvas>
+                                    </div>
+                                    <div class="row"  ng-show='loading.categories'> <div class="col s12"> <div class="progress"> <div class="indeterminate"></div> </div> </div> </div>
+                                </div>
                             </div>
                         </div>
+
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="col s12 m12 l6">
+                <ul id="issues-collection" class="collection">
+                    <li class="collection-item ">
+                        <span class="collection-header">Incidencias por regiones</span>
+                    </li>
+                    <li>
+                        <div id="morris-radar-chart" class="section">
+                            <div class="row">
+                                <div class="col s12 m12 19">
+                                    <div class="sample-chart-wrapper">
+                                        <canvas id="doughnut-chart" height="170px"></canvas>
+                                    </div>
+                                    <div class="row"  ng-show='loading.categories'> <div class="col s12"> <div class="progress"> <div class="indeterminate"></div> </div> </div> </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </li>
+                </ul>
+
+            </div>
+        </div></div>
 </div>
+
 
 
 <div id="work-collections" class="test">
@@ -228,6 +231,9 @@
 </div>
 
 <style type="text/css">
+    .work-collections{
+        filter: blur(2px) grayscale(.5) opacity(0.8);
+    }
     .square{
         height: 30;
         background: #f00;
@@ -258,12 +264,11 @@
 
 <script type="text/javascript">
 
-
+/*
 Highcharts.setOptions({
     colors: ['rgba(20,20,20,0.3)', '#FF4C00', '#FF6300', '#F0E315', '#DFFF00', '#B0FF00', '#00FF01', '#00FF01'],
     borderColors: ['red','red','red','red','red','red','red','red']
 });
-
 
 Highcharts.chart('indicator-by-region', {
     chart: {
@@ -335,7 +340,7 @@ Highcharts.chart('indicator-by-region', {
             y: 0.91
         }]
     }]});
-/*
+
 Highcharts.chart('offices', {
     chart: {
         type: 'column',
