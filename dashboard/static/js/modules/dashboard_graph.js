@@ -136,7 +136,7 @@ app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', '$
 	new Chart(document.getElementById("line-chart-sample"), {
 	    type: 'bar',
 	    data: {
-	      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+	      labels: ['Préstamos','Cuentas de ahorro','Tarjetas de crédito','Certificado'],
 	      datasets: [
 	        {
 	          label: "",
@@ -163,19 +163,19 @@ app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', '$
  new Chart(document.getElementById("doughnut-chart"), {
     type: 'doughnut',
     data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      labels: ['METROPOLITANA NORTE', 'METROPOLITANA CENTRAL', 'METROPOLITANA OESTE', 'METROPOLITANA ORIENTAL', 'ZONA ESTE', 'ZONA SANTIAGO ESTE', 'ZONA SANTIAGO OESTE', 'ZONA NORCENTRAL', 'ZONA NORDESTE', 'ZONA NOROESTE', 'ZONA SURESTE', 'SUR'],
       datasets: [
         {
           label: "Population (millions)",
-          backgroundColor: [transparentize("#3e95cd", .3), transparentize("#8e5ea2", .3),transparentize("#3cba9f", .3),transparentize("#e8c3b9", .3),transparentize("#c45850", .3)],
-          data: [2478,5267,734,784,433]
+          backgroundColor: [transparentize("#3e95cd", .3), transparentize("#8e5ea2", .3),transparentize("#3cba9f", .3),transparentize("#e8c3b9", .3),transparentize("#c45850", .3),transparentize('#929AE0', .3), transparentize('#23BB6F', .3), transparentize('#050C3D', .3), transparentize('#DCB7E5', .3), transparentize('#60FEE7', .3), transparentize('#B033F7', .3), transparentize('#04140C', .3)],
+          data: [2289, 1904, 1720, 270, 790, 2795, 1620, 1729, 1176, 1739, 1228, 2273]
         }
       ]
     },
     options: {
       title: {
-        display: true,
-        text: 'Predicted world population (millions) in 2050'
+        display: false
+        // text: 'Predicted world population (millions) in 2050'
       }
     }
 });
