@@ -19,7 +19,8 @@ var MapView = function(scope, object_name) {
 	var view = new ol.View({
           center: [-7827756.142193, 2137777.233628, -7686973.372364, 2289551.494243],
           zoom: 7,
-          minZoom:8
+          minZoom:8,
+          maxZoom:8
     });
 	 
 	var overlay = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
@@ -187,6 +188,7 @@ var MapView = function(scope, object_name) {
 	       hidePopup();
 	       setOffices(feature.U.info.region_name.value);
 	       map.getView().setZoom(10);
+	       map.getView().setZoom(10);
 	    });
 	});
 
@@ -252,6 +254,11 @@ var MapView = function(scope, object_name) {
 
 	var centerMap = function(coords, zoom) {
 	    map.getView().setCenter(ol.proj.transform([coords.long, coords.lat], 'EPSG:4326', 'EPSG:3857'));
+	    var properties = map.getView().getProperties();
+		properties["maxZoom"] = zoom;
+		properties["minZoom"] = zoom;
+		map.setView(new ol.View(properties));
+
 	    map.getView().setZoom(zoom);
 	};
 

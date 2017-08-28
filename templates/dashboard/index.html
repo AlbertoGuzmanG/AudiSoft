@@ -73,6 +73,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                     </li>
                     <li class="collection-item" ng-show='loading.offices'>
                         <div class="row">
@@ -118,8 +120,134 @@
                 </ul>
             </div>
         </div>
+                    </div>
+</div>
+
+
+<div id="work-collections">
+                        <div class="row" style="backgroud:#f00">
+                            <div class="col s12 m12 l6">
+                                <ul id="issues-collection" class="collection">
+                                    <li class="collection-item ">
+                                        <span class="collection-header">Categoría de indicadores por Oficinas</span>
+                                    </li>
+                                    <li>
+                                        <div id="morris-radar-chart" class="section">
+                                          <div class="row">
+                                            <div class="col s12 m12 19">
+                                                  <div class="sample-chart-wrapper">
+                                                    <canvas id="line-chart-sample" height="170px"></canvas>
+                                                  </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                                                      <div class="col s12 m12 l6">
+                                <ul id="issues-collection" class="collection">
+                                    <li class="collection-item ">
+                                        <span class="collection-header">Incidencias por regiones</span>
+                                    </li>
+                                    <li>
+                                        <div id="morris-radar-chart" class="section">
+                                          <div class="row">
+                                            <div class="col s12 m12 19">
+                                                  <div class="sample-chart-wrapper">
+                                                    <canvas id="doughnut-chart" height="170px"></canvas>
+                                                  </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+</div>
+
+
+<div id="work-collections" class="test">
+    <div class="row">
+      <div class="col s3 square">Norte</div>
+      <div class="col s9">
+          <div class="col s1 square">1</div>
+          <div class="col s1 square">2</div>
+          <div class="col s1 square">3</div>
+          <div class="col s1 square">4</div>
+          <div class="col s1 square">5</div>
+          <div class="col s1 square">6</div>
+          <div class="col s1 square">7</div>
+          <div class="col s1 square">8</div>
+          <div class="col s1 square">9</div>
+          <div class="col s1 square">10</div>
+          <div class="col s1 square">11</div>
+          <div class="col s1 square">12</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s3 square"> Sur</div>
+      <div class="col s9">
+          <div class="col s1 square">1</div>
+          <div class="col s1 square">2</div>
+          <div class="col s1 square">3</div>
+          <div class="col s1 square">4</div>
+          <div class="col s1 square">5</div>
+          <div class="col s1 square">6</div>
+          <div class="col s1 square">7</div>
+          <div class="col s1 square">8</div>
+          <div class="col s1 square">9</div>
+          <div class="col s1 square">10</div>
+          <div class="col s1 square">11</div>
+          <div class="col s1 square">12</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s3 square"> Sur</div>
+      <div class="col s9">
+          <div class="col s1 square">1</div>
+          <div class="col s1 square">2</div>
+          <div class="col s1 square">3</div>
+          <div class="col s1 square">4</div>
+          <div class="col s1 square">5</div>
+          <div class="col s1 square">6</div>
+          <div class="col s1 square">7</div>
+          <div class="col s1 square">8</div>
+          <div class="col s1 square">9</div>
+          <div class="col s1 square">10</div>
+          <div class="col s1 square">11</div>
+          <div class="col s1 square">12</div>
+      </div>
     </div>
 </div>
+
+<style type="text/css">
+    .square{
+        height: 30;
+        background: #f00;
+        text-align: center;
+            border: 1px solid #eee;
+    text-align: center;
+    line-height: 50px;
+    font-size: 28px;
+    background-color: tomato;
+    color: white;
+    padding: 0;
+    }
+
+    .test .row{
+        margin-left: -.75rem;
+        margin-right: -.75rem;
+
+    }
+
+</style>
 
 <script type="text/javascript" src="/static/js/modules/map_view.js"></script>
 
