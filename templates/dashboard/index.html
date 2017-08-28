@@ -204,170 +204,139 @@
 
 
 
+<div id="work-collections">
+                        <div class="row" style="backgroud:#f00">
+                            <div class="col s12 m12 l6">
+                                <ul id="issues-collection" class="collection">
+                                    <li class="collection-item ">
+                                        <span class="collection-header">Categoría de indicadores por Oficinas</span>
+                                    </li>
+                                    <li>
+                                        <div id="morris-radar-chart" class="section">
+                                          <div class="row">
+                                            <div class="col s12 m12 19">
+                                                  <div class="sample-chart-wrapper">
+                                                    <canvas id="line-chart-sample" height="170px"></canvas>
+                                                  </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        
+                                    </li>
+                                </ul>
+
+                            </div>
+                          
+                                                      <div class="col s12 m12 l6">
+                                <ul id="issues-collection" class="collection">
+                                    <li class="collection-item ">
+                                        <span class="collection-header">Incidencias por regiones</span>
+                                    </li>
+                                    <li>
+                                        <div id="morris-radar-chart" class="section">
+                                          <div class="row">
+                                            <div class="col s12 m12 19">
+                                                  <div class="sample-chart-wrapper">
+                                                    <canvas id="doughnut-chart" height="170px"></canvas>
+                                                  </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        
+                                    </li>
+                                </ul>
+
+                            </div>  
+                        </div>
+                    </div>
+
+
+<div id="work-collections" class="test">
+    <div class="row">
+      <div class="col s3 square">Norte</div>
+      <div class="col s9">
+          <div class="col s1 square">1</div>
+          <div class="col s1 square">2</div>
+          <div class="col s1 square">3</div>
+          <div class="col s1 square">4</div>
+          <div class="col s1 square">5</div>
+          <div class="col s1 square">6</div>
+          <div class="col s1 square">7</div>
+          <div class="col s1 square">8</div>
+          <div class="col s1 square">9</div>
+          <div class="col s1 square">10</div>
+          <div class="col s1 square">11</div>
+          <div class="col s1 square">12</div>          
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s3 square"> Sur</div>
+      <div class="col s9">
+          <div class="col s1 square">1</div>
+          <div class="col s1 square">2</div>
+          <div class="col s1 square">3</div>
+          <div class="col s1 square">4</div>
+          <div class="col s1 square">5</div>
+          <div class="col s1 square">6</div>
+          <div class="col s1 square">7</div>
+          <div class="col s1 square">8</div>
+          <div class="col s1 square">9</div>
+          <div class="col s1 square">10</div>
+          <div class="col s1 square">11</div>
+          <div class="col s1 square">12</div>          
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s3 square"> Sur</div>
+      <div class="col s9">
+          <div class="col s1 square">1</div>
+          <div class="col s1 square">2</div>
+          <div class="col s1 square">3</div>
+          <div class="col s1 square">4</div>
+          <div class="col s1 square">5</div>
+          <div class="col s1 square">6</div>
+          <div class="col s1 square">7</div>
+          <div class="col s1 square">8</div>
+          <div class="col s1 square">9</div>
+          <div class="col s1 square">10</div>
+          <div class="col s1 square">11</div>
+          <div class="col s1 square">12</div>          
+      </div>
+    </div>    
+</div>
 
 
 
 <div ng-controller='dashboardController'>
-    <div class="row">
-        <div class="col s12 m8 l8">
-            <div class="card">
-                <div class="card-move-up waves-effect waves-block waves-light">
-                    <div class="move-up cyan darken-1">
-                        <div>
-                            <span class="chart-title white-text">RIESGO POR OFICINA</span>
-                            <div class="switch chart-revenue-switch right">
-                                <select id="select-state" placeholder="Dime cuales sucursales quieres comparar..">
-                                    <option value="">Sucursal..</option>
-                                </select>
-                                <button id="filter-btn" class="btn waves-effect waves-light cyan darken-2">Filtrar</button>
-                            </div>
-                        </div>
-                        <div class="trending-line-chart-wrapper">
-                            <!-- <canvas id="trending-line-chart" height="70"></canvas> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="mdi-content-add activator"></i></a>
-                            <canvas id="trending-line-chart" height="70"></canvas>
-                    
-                    <div class="progress" ng-if='loading.offices_risk'>
-                        <div class="indeterminate"></div>
-                    </div>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Revenue by Month <i class="mdi-navigation-close right"></i></span>
-                    <table class="responsive-table">
-                        <thead>
-                            <tr>
-                                <th data-field="id">ID</th>
-                                <th data-field="month">Month</th>
-                                <th data-field="item-sold">Item Sold</th>
-                                <th data-field="item-price">Item Price</th>
-                                <th data-field="total-profit">Total Profit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>January</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>February</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>March</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>April</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>May</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>June</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>July</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>August</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Septmber</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>Octomber</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>November</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>December</td>
-                                <td>122</td>
-                                <td>100</td>
-                                <td>$122,00.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m8 l6">
-            <div class="card">
-                <div class="sample-chart-wrapper">
-                    <span>Top Oficinas Por Categorias de Indicadores </span>
-                    <div id="offices" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m8 l6">
-            <div class="card">
-                <div class="sample-chart-wrapper">
-                    <span>TOP Oficinas Mayor riesgo</span>
-                    <div id="indicator-by-region" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m8 l6">
-            <div class="card">
-                <div class="sample-chart-wrapper">
-                    <span>TERMOMETRO DE OFICINAS</span>
-                    <div id="thermometer" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
 
 
 
 
+<style type="text/css">
+    .square{
+        height: 30;
+        background: #f00;
+        text-align: center;   
+            border: 1px solid #eee;
+    text-align: center;
+    line-height: 50px;
+    font-size: 28px;
+    background-color: tomato;
+    color: white;
+    padding: 0;
+    }
 
+    .test .row{
+        margin-left: -.75rem;
+        margin-right: -.75rem;
+        
+    }
+
+</style>
 
 <script type="text/javascript" src="/static/js/modules/map_view.js"></script>
 

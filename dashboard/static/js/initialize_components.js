@@ -1,9 +1,9 @@
 /* Initial Data */
 var monthsLabels = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
 var initialMonthLabels = monthsLabels.slice(0,7); // default show first 7 months
-Chart.defaults.global.defaultFontColor = "#fff";
+//Chart.defaults.global.defaultFontColor = "#f00";
 
-var revenueSelectize = $('#select-state').selectize({maxItems: 3, items: ['10']});
+/*var revenueSelectize = $('#select-state').selectize({maxItems: 3, items: ['10']});
 
 // hide/show selectize control on filter btn click
 $('#filter-btn').on('click', function () {
@@ -131,7 +131,7 @@ function officesRiskChart(chartData) {
     // add initial data to selectize component
 	selectizeInitialData.forEach((item) => {
 		revenueSelectize[0].selectize.addItem(item);
-	});
+	});*/
 }
 
 
