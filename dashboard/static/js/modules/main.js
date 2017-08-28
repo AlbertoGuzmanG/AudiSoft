@@ -27,8 +27,10 @@
 			];
 
 			//Showing the map
+			scope.regions_data = regions_data;
 			var map_view = new MapView(scope);
 
+			scope.goHome = map_view.goHome;
 			//Building map regions
 			var object_name = 'polar-chart-country';
 			var regions_char_object = document.getElementById(object_name).getContext("2d");

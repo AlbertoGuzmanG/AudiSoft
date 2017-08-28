@@ -1,6 +1,7 @@
 var MapView = function(scope, object_name) {
 	var current_position = {lat:0, long:0};
 	var office_layer = null;
+	var regions_data = scope.regions_data;
 
 	var getLevel = function(value){
 		values = {low: 30, medium: 55, high: 100};
@@ -18,7 +19,7 @@ var MapView = function(scope, object_name) {
 	//Getting Rep. Dom. center vier
 	var view = new ol.View({
           center: [-7827756.142193, 2137777.233628, -7686973.372364, 2289551.494243],
-          zoom: 7,
+          zoom: 8,
           minZoom:8,
           maxZoom:8
     });
@@ -184,11 +185,12 @@ var MapView = function(scope, object_name) {
 
 	$(map.getViewport()).on("dblclick", function(e) {
 	    map.forEachFeatureAtPixel(map.getEventPixel(e), function (feature, layer) {
+	       var region_name = feature.U.info.region_name.value;
 	       map.getView().setCenter( [current_position.lat, current_position.long]);
 	       hidePopup();
-	       setOffices(feature.U.info.region_name.value);
-	       map.getView().setZoom(10);
-	       map.getView().setZoom(10);
+	       setOffices(region_name);
+	       var region = (regions_data.filter(function(e){ if(e.name == region_name.trim()) return e}))[0];
+	       centerMap(region.center_coords, region.zoom);
 	    });
 	});
 
@@ -298,8 +300,6 @@ var MapView = function(scope, object_name) {
 	var popup = function(info, location){
 		var popup_content = '';
 
-		//console.log(info, location);
-
 		for (key in info) {
 			popup_content += '<li class="collection-item" ><text><b>' + info[key].label +': </b> <span>' + info[key].value +'</span></text></li>';
 		}
@@ -312,9 +312,22 @@ var MapView = function(scope, object_name) {
 		overlay.setPosition(undefined);
 	}
 
+	var goHome = function(){
+		hidePopup();
+		//centerMap( {lat:18.472467, long:-69.925593} ,8);
+		var properties = map.getView().getProperties();
+		properties["maxZoom"] = 8;
+		properties["minZoom"] = 8;
+		properties["center"] = [-7827756.142193, 2137777.233628, -7686973.372364, 2289551.494243];
+		map.setView(new ol.View(properties));
+
+	    map.getView().setZoom(8);
+	}
+
 	return {
 		centerMap: centerMap,
 		showRegion: showRegion,
-		hidePopup: hidePopup
+		hidePopup: hidePopup,
+		goHome: goHome
 	}
 }
