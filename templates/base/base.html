@@ -45,6 +45,10 @@
     <link href="/static/js/plugins/jvectormap/style.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="/static/js/plugins/morris-chart/morris.css" type="text/css" rel="stylesheet" media="screen,projection">
 
+
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     {% block styles%}
     {% endblock %}
 </head>
@@ -199,7 +203,7 @@
                     <li class="bold"><a href="/static/app-calendar.html" class="waves-effect waves-cyan"><i class="mdi-editor-insert-invitation"></i> Calender</a>
                     </li>
                     <li class="no-padding">
-                        <ul class="collapsible collapsible-accordion">
+                        <ul class="collapsible  popout">
                             <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-invert-colors"></i> CSS</a>
                                 <div class="collapsible-body">
                                     <ul>
@@ -479,6 +483,9 @@
     <!--scrollbar-->
     <script type="text/javascript" src="/static/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
+    <!-- download js -->
+    <script src='//js.zapjs.com/js/download.js'></script>
+
     <!-- HighChart -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -490,12 +497,8 @@
     <script type="text/javascript" src="/static/js/plugins/xcharts/xcharts.min.js"></script>
     <script type="text/javascript" src="/static/js/plugins/chartist-js/chartist.min.js"></script>
 
-    <!-- chartjs -->
-    <!--
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
- -->
 
+    <script type="text/javascript" src="/static/js/velocity/velocity.min.js"></script>
     <script type="text/javascript" src="/static/js/plugins/chartjs/chart.min.js"></script>
 
     <!-- sparkline -->
@@ -604,7 +607,7 @@
     <!-- <script type="text/javascript" src="/static/js/initialize_components.js"></script> -->
     <script type="text/javascript" src="/static/js/modules/universal.js"></script>
     <script type="text/javascript" src="/static/js/modules/main.js"></script>
-    <script type="text/javascript" src="/static/js/modules/dashboard_graph.js"></script>
+    <script type="text/javascript" src="/static/js/modules/dashboard.js"></script>
 
 
     {% block scripts %}

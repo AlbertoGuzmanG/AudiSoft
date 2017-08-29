@@ -6,6 +6,7 @@ app.config(['$interpolateProvider', function($interpolateProvider) {
 }]);
 
 app.controller('navegationController', ['$scope', '$http', '$rootScope', '$q', function(scope, http, rootScope, q){
+	scope.indicator_type = true;
 	scope.indicator_change = function(){
 		rootScope.$broadcast('indicator_type_change', scope.indicator_type);
 	}
@@ -13,9 +14,12 @@ app.controller('navegationController', ['$scope', '$http', '$rootScope', '$q', f
 
 app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', '$timeout', function(scope, http, rootScope, q, timeout){
 
-	scope.resume_box = {};
+	scope.resume_box_2 = { office : 'Isabel La Catolica 45%', category : 'Préstamos 44%', indicator : 'Deterioro de la cartera 36%' };
+	scope.resume_box_1 = { office : 'Av Tiradentes 41%', category : 'Tárjetas 51%', indicator : 'Garantes de Préstamos 40%' };
+	scope.resume_box = { };
 	scope.settings = { indicator_type : 1};
 	scope.loading = { offices : false, regions : false, categories : false};
+	scope.office_modal = [{ name : 'Préstamos', percent : 50}, { name : 'Tárjetas', percent : 50}]
 
 	var getOffices = () => http.get('/api/offices');
 	var getOfficesRisk = () => http.get('/dashboard/api/offices_risk/' + scope.settings.indicator_type).finally(() => loading.hide.all());
@@ -127,7 +131,6 @@ app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', '$
 		grey: 'rgb(201, 203, 207)'
 	};
 
-
 	var transparentize = function(color, opacity) {
 		var alpha = opacity === undefined? 0.5 : 1 - opacity;
 		return Chart.helpers.color(color).alpha(alpha).rgbString();
@@ -136,7 +139,7 @@ app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', '$
 	new Chart(document.getElementById("line-chart-sample"), {
 	    type: 'bar',
 	    data: {
-	      labels: ['Préstamos','Cuentas de ahorro','Tarjetas de crédito','Certificado'],
+	      labels: ['Préstamos','Cuentas de ahorro','Tárjetas de crédito','Certificado'],
 	      datasets: [
 	        {
 	          label: "",
@@ -173,7 +176,7 @@ app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', '$
       ]
     },
     options: {
-      title: {
+      title: { 	
         display: false
         // text: 'Predicted world population (millions) in 2050'
       }

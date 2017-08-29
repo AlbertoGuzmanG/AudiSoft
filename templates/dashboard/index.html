@@ -11,43 +11,91 @@
 </div>
 
 
-<div id="card-stats">
-                        <div class="row">
-                            <div class="col s12 m6 l4">
-                                <div class="card">
-                                    <div class="card-content  green white-text">
-                                        <p class="card-stats-title"><i class="mdi-action-home"></i> Oficina</p>
-                                        <h4 class="card-stats-number">Isabel la Católica 45%</h4>
-                                        <p class="card-stats-compare"><span class="green-text text-lighten-5">Últimas 3 ejecuciones</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m6 l4">
-                                <div class="card">
-                                    <div class="card-content blue-grey white-text">
-                                        <p class="card-stats-title"><i class="mdi-action-group-work"></i> Categoría</p>
-                                        <h4 class="card-stats-number">Préstamos 44%</h4>
-                                        <p class="card-stats-compare"><span class="purple-text text-lighten-5">Últimas 3 ejecuciones</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m6 l4">
-                                <div class="card">
-                                    <div class="card-content pink lighten-2 white-text">
-                                        <p class="card-stats-title"><i class="mdi-action-dashboard"></i> Indicador</p>
-                                        <h4 class="card-stats-number">Deterioro de la cartera 36%</h4>
-                                        <p class="card-stats-compare"><span class="deep-purple-text text-lighten-5">Últimas 3 ejecuciones</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </div>
-                    </div>
 
 <div ng-controller='dashboardController'>
+
+
+<div id="card-stats">
+    <div class="row" ng-hide='settings.indicator_type == 2'>
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content  green white-text">
+                    <p class="card-stats-title"><i class="mdi-action-home"></i> Oficina</p>
+                    <h4 class="card-stats-number">[[resume_box_2.office]]</h4>
+                    <p class="card-stats-compare"><span class="green-text text-lighten-5">Últimas 3 ejecuciones</span></p>
+                    <div class="row"  ng-show='loading.categories'> <div class="col s12"> <div class="progress"> <div class="indeterminate"></div> </div> </div> </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content blue-grey white-text">
+                    <p class="card-stats-title"><i class="mdi-action-group-work"></i> Categoría</p>
+                    <h4 class="card-stats-number">[[resume_box_2.category]]</h4>
+                    <p class="card-stats-compare"><span class="purple-text text-lighten-5">Últimas 3 ejecuciones</span>
+                    <div class="row"  ng-show='loading.categories'> <div class="col s12"> <div class="progress"> <div class="indeterminate"></div> </div> </div> </div>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content pink lighten-2 white-text">
+                    <p class="card-stats-title"><i class="mdi-action-dashboard"></i> Indicador</p>
+                    <h4 class="card-stats-number">[[resume_box_2.indicator]]</h4>
+                    <p class="card-stats-compare"><span class="deep-purple-text text-lighten-5">Últimas 3 ejecuciones</span>
+                    <div class="row"  ng-show='loading.categories'> <div class="col s12"> <div class="progress"> <div class="indeterminate"></div> </div> </div> </div>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row" ng-show='settings.indicator_type == 2'>
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content  green white-text">
+                    <p class="card-stats-title"><i class="mdi-action-home"></i> Oficina</p>
+                    <h4 class="card-stats-number">[[resume_box_1.office]]</h4>
+                    <p class="card-stats-compare"><span class="green-text text-lighten-5">Últimas 3 ejecuciones</span></p>
+                    <div class="row"  ng-show='loading.categories'> <div class="col s12"> <div class="progress"> <div class="indeterminate"></div> </div> </div> </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content blue-grey white-text">
+                    <p class="card-stats-title"><i class="mdi-action-group-work"></i> Categoría</p>
+                    <h4 class="card-stats-number">[[resume_box_1.category]]</h4>
+                    <p class="card-stats-compare"><span class="purple-text text-lighten-5">Últimas 3 ejecuciones</span>
+                    <div class="row"  ng-show='loading.categories'> <div class="col s12"> <div class="progress"> <div class="indeterminate"></div> </div> </div> </div>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content pink lighten-2 white-text">
+                    <p class="card-stats-title"><i class="mdi-action-dashboard"></i> Indicador</p>
+                    <h4 class="card-stats-number">[[resume_box_1.indicator]]</h4>
+                    <p class="card-stats-compare"><span class="deep-purple-text text-lighten-5">Últimas 3 ejecuciones</span>
+                    <div class="row"  ng-show='loading.categories'> <div class="col s12"> <div class="progress"> <div class="indeterminate"></div> </div> </div> </div>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
     <div id="work-collections">
         <div class="row">
             <div class="col s12 m12 l6">
@@ -57,7 +105,7 @@
                         <span class="collection-header">Oficinas con mayor cantidad de incidencias</span>
                         <p>Evaluación por categoría de indicadores</p>
                     </li>
-                    <li class="collection-item" ng-repeat='off in resume_box.offices'>
+                    <li class="collection-item trigger-modal" ng-repeat='off in resume_box.offices'>
                         <div class="row">
                             <div class="col s7 title">
                                 <p class="collections-title"><strong>[[off.code]] -</strong> [[off.name]]</p>
@@ -73,7 +121,9 @@
                             </div>
                         </div>
 
-
+                    </li>
+                    <li class="collection-item" ng-show='resume_box.offices.length == 0'>
+                        Sin información
                     </li>
                     <li class="collection-item" ng-show='loading.offices'>
                         <div class="row">
@@ -94,21 +144,24 @@
                         <span class="collection-header">Categorías más destacadas</span>
                         <p>Evaluación por indicadores</p>
                     </li>
-                    <li class="collection-item" ng-repeat='cat in resume_box.categories'>
+                    <li class="collection-item trigger-modal_2" ng-repeat='cat in resume_box.categories'>
                         <div class="row">
                             <div class="col s7 title">
                                 <p class="collections-title"><strong>[[cat.name]]</strong></p>
                                 <p class="collections-content">[[cat.total_incidences]] incidencias</p>
                             </div>
                             <div class="col s2">
-                                <span class="task-cat yellow darken-4">40%</span>
+                                <span class="task-cat yellow darken-4">60%</span>
                             </div>
                             <div class="col s3">
                                 <div class="progress">
-                                    <div class="determinate" style="width: 40%"></div>
+                                    <div class="determinate" style="width: 6    0%"></div>
                                 </div>
                             </div>
                         </div>
+                    </li>
+                    <li class="collection-item" ng-show='resume_box.categories.length == 0'>
+                        Sin información
                     </li>
                     <li class="collection-item" ng-show='loading.categories'>
                         <div class="row">
@@ -170,9 +223,73 @@
 
             </div>
         </div></div>
+
+
+<div id="modal1" class="modal modal-fixed-footer">
+  <div class="modal-content">
+  <ul class="collapsible popout" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header active"><i class="material-icons">filter_drama</i>Préstamos<span style="position: absolute; right: 10%;">45%</span></div>
+      <div class="collapsible-body">
+            <ul class="collection">
+              <li class="collection-itém">Prestamos Garantia Prendaria hip No Tasados<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+              <li class="collection-itém">Prestamos Castigados no Reportados SB<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+              <li class="collection-item">Préstamos y Cuota Flexible Supera el 80%<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+              <li class="collection-item">Empleados Garantes de Préstamos<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+            </ul>
+      </div>
+    </li>
+
+    <li>
+      <div class="collapsible-header"><i class="material-icons">place</i>Tárjetas<span style="position: absolute; right: 10%;">55%</span></div>
+      <div class="collapsible-body">
+            <ul class="collection">
+              <li class="collection-item">Aumento TC Mal comportamiento Pago<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+              <li class="collection-item">Credimas exceden el limite de creditos aprobado<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+              <li class="collection-item">Analisis limite y consumo de tárjetas de credito<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+              <li class="collection-item">Credimas sin registros de aceleracion<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+            </ul>
+      </div>
+    </li>
+  </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Finalizar</a>
+  </div>
 </div>
 
+<div id="modal2" class="modal modal-fixed-footer">
+  <div class="modal-content">
+  <ul class="collapsible popout" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header active"><i class="material-icons">filter_drama</i>Préstamos y Cuota Flexible Supera el 80%<span style="position: absolute; right: 10%;">45%</span></div>
+      <div class="collapsible-body">
+            <ul class="collection">
+              <li class="collection-item">2017/02/13<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+              <li class="collection-item">2017/03/16<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+              <li class="collection-item">2017/04/14<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+              <li class="collection-item">2017/05/15<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+            </ul>
+      </div>
+    </li>
 
+    <li>
+      <div class="collapsible-header"><i class="material-icons">place</i>érestamos Castigados no Reportados SB<span style="position: absolute; right: 10%;">55%</span></div>
+      <div class="collapsible-body">
+            <ul class="collection">
+              <li class="collection-item">2017/04/15<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+              <li class="collection-item">2017/05/17<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+              <li class="collection-item">2017/06/16<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+              <li class="collection-item">2017/07/11<span style="cursor: pointer; position: absolute; right: 10%;"><i class="mdi-file-file-download"></i></span></li>
+            </ul>
+      </div>
+    </li>
+  </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Finalizar</a>
+  </div>
+</div></div>
 
 <div id="work-collections" class="test">
     <div class="row">
@@ -230,10 +347,8 @@
     </div>
 </div>
 
+
 <style type="text/css">
-    .work-collections{
-        filter: blur(2px) grayscale(.5) opacity(0.8);
-    }
     .square{
         height: 30;
         background: #f00;
@@ -264,335 +379,22 @@
 
 <script type="text/javascript">
 
-/*
-Highcharts.setOptions({
-    colors: ['rgba(20,20,20,0.3)', '#FF4C00', '#FF6300', '#F0E315', '#DFFF00', '#B0FF00', '#00FF01', '#00FF01'],
-    borderColors: ['red','red','red','red','red','red','red','red']
-});
 
-Highcharts.chart('indicator-by-region', {
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-    },
-    exporting : false,
-    title: {
-        text: ''
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                style: {
-                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                }
-            }
-        }
-    },
-    series: [{
-        name: 'Categorías de Indicadores',
-        colorByPoint: true,
-        data: [ {
-            name: 'METROPOLITANA NORTE',
-            y: 10.38,
-            sliced: true,
-            selected: true
-        }, {
-            name: 'METROPOLITANA CENTRAL',
-            y: 1.38
-        }, {
-            name: 'METROPOLITANA OESTE',
-            y: 4.7
-        }, {
-            name: 'METROPOLITANA ORIENTAL',
-            y: 0.78
-        }, {
-            name: 'ZONA ESTE',
-            y: 0.38
-        }, {
-            name: 'ZONA SANTIAGO ESTE',
-            y: 3.87
-        }, {
-            name: 'ZONA SANTIAGO OESTE',
-            y: 2.38
-        }, {
-            name: 'ZONA NORCENTRAL',
-            y: 10.38
-        }, {
-            name: 'ZONA NORDESTE',
-            y: 7.45
-        }, {
-            name: 'ZONA NOROESTE',
-            y: 0.17
-        }, {
-            name: 'ZONA SURESTE',
-            y: 4.77
-        }, {
-            name: 'ZONA SUROESTE',
-            y: 0.91
-        }]
-    }]});
+(function(){
 
-Highcharts.chart('offices', {
-    chart: {
-        type: 'column',
-        events : {
-            drilldown : function (e) {
-                this.addSeriesAsDrilldown(e.point, { name : 'etst', data : [['aa', 1]]});
-            }
-    }
+    $('.mdi-file-file-download').on('click', function () {
+        download("hello world", $(this).parent().parent().text()  + " [" + new Date().toLocaleString() + "].zip", "text/plain");
+    });
 
-    },
-    title: {
-        text: ''
-    },
-    xAxis: {
-        type: 'category'
-    },
-    yAxis: {
-        title: {
-            text: 'Pocentaje Total de Riesgo'
-        }
+    $('body').on('dblclick', '.trigger-modal', function(){
+        $('#modal1').openModal();
+    });
 
-    },
-    legend: {
-        enabled: false
-    },
-    plotOptions: {
-        series: {
-            borderWidth: 0,
-            dataLabels: {
-                enabled: true,
-                format: '{point.y:.1f}%'
-            }
-        }
-    },
+    $('body').on('dblclick', '.trigger-modal_2', function(){
+        $('#modal2').openModal();
+    });
+})();
 
-    tooltip: {
-        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-    },
-
-    series: [{
-        name : 'Oficinas',
-        colorByPoint : true,
-        data : [{"name":"Boulevard","y":60,"drilldown":"51"},{"name":"Las Palmas","y":40,"drilldown":"93"}]
-
-    }],
-    /* drilldown: {
-        series: [{
-            name: 'Boulevard',
-            id: '51',
-            data: [
-                [
-                    'Indicador 01',
-                    24.13
-                ],
-                [
-                    'Indicador 02',
-                    17.2
-                ],
-                [
-                    'Indicador 03',
-                    8.11
-                ],
-                [
-                    'Indicador 04',
-                    5.33
-                ],
-                [
-                    'Indicador 05',
-                    1.06
-                ],
-                [
-                    'Indicador 06',
-                    0.5
-                ]
-            ]
-        }, {
-            name: 'Cruce de Veron',
-            id: '93',
-            data: [
-                [
-                    'Indicador 01',
-                    5
-                ],
-                [
-                    'Indicador 02',
-                    4.32
-                ],
-                [
-                    'Indicador 03',
-                    3.68
-                ],
-                [
-                    'Indicador 04',
-                    2.96
-                ],
-                [
-                    'Indicador 05',
-                    2.53
-                ],
-                [
-                    'Indicador 06',
-                    1.45
-                ]
-            ]
-        }, {
-            name: 'Las Palmas',
-            id: 'Las Palmas',
-            data: [
-                [
-                    'Indicador 01',
-                    2.76
-                ],
-                [
-                    'Indicador 02',
-                    2.32
-                ],
-                [
-                    'Indicador 03',
-                    2.31
-                ],
-                [
-                    'Indicador 04',
-                    1.27
-                ],
-                [
-                    'Indicador 05',
-                    1.02
-                ],
-                [
-                    'Indicador 06',
-                    0.33
-                ]
-            ]
-        }, {
-            name: 'Coral Mall',
-            id: 'Coral Mall',
-            data: [
-                [
-                    'Indicador 01',
-                    2.56
-                ],
-                [
-                    'Indicador 02',
-                    0.77
-                ],
-                [
-                    'Indicador 03',
-                    0.42
-                ],
-                [
-                    'Indicador 04',
-                    0.3
-                ],
-                [
-                    'Indicador 05',
-                    0.29
-                ],
-                [
-                    'Indicador 06',
-                    0.26
-                ]
-            ]
-        }, {
-            name: 'Blue Mall',
-            id: 'Blue Mall',
-            data: [
-                [
-                    'Indicador 01.x',
-                    0.34
-                ],
-                [
-                    'Indicador 02',
-                    0.24
-                ],
-                [
-                    'Indicador 03',
-                    0.24
-                ],
-                [
-                    'Indicador 04',
-                    0.24
-                ],
-                [
-                    'Indicador 05',
-                    0.17
-                ],
-                [
-                    'Indicador 06',
-                    0.16
-                ]
-            ]
-        }]
-    }});
-
-Highcharts.chart('thermometer', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: ''
-    },
-    xAxis: {
-        type: 'category',
-        labels: {
-            rotation: -45,
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Incidencias (Total por Categorías)'
-        }
-    },
-    legend: {
-        enabled: false
-    },
-    exporting : false,
-    tooltip: {
-        pointFormat: 'Population in 2008: <b>{point.y:.1f} millions</b>'
-    },
-    series: [{
-            colorByPoint: true,
-
-        name: 'Population',
-        data: [
-            ['Isabel La Catolica', 23.7],
-            ['Independencia', 16.1],
-            ['Aeropuerto', 14.2],
-            ['Maximo Gomez', 14.0],
-            ['Padre Castellanos', 12.1],
-            ['Los Mina Paulo', 11.8],
-            ['Las Americas City', 8.9],
-            ['Ave. Mella', 8.9]
-        ],
-        dataLabels: {
-            enabled: true,
-            rotation: -90,
-            color: '#FFFFFF',
-            align: 'right',
-            format: '{point.y:.1f}', // one decimal
-            y: 10, // 10 pixels down from the top
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    }]});
-*/
 </script>
+
 {% endblock %}
