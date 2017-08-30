@@ -13,6 +13,7 @@ class BaseModel(models.Model):
 
 class Category(BaseModel):
 	name = models.CharField(max_length=50)
+	description = models.CharField(max_length=600)
 
 	def __str__(self):
 		return self.name
@@ -25,7 +26,9 @@ class IndicatorType(BaseModel):
 		return self.name
 
 class Indicator(BaseModel):
-	name = models.CharField(max_length=50)
+	code = models.CharField(max_length=50)
+	name = models.CharField(max_length=100)
+	description = models.CharField(max_length=600)
 	# key = models.CharField(max_length=50, unique=True)
 	categories = models.ManyToManyField(Category, through='IndicatorCategory')
 
