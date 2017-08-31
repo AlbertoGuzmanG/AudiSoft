@@ -49,7 +49,6 @@ class IndicatorCategory(BaseModel):
 	indicator = models.ForeignKey(Indicator, on_delete=models.PROTECT)
 	category = models.ForeignKey(Category, on_delete=models.PROTECT)
 	indicator_type = models.ForeignKey(IndicatorType, on_delete=models.PROTECT);
-	region = models.ForeignKey(Region, on_delete=models.PROTECT)
 
 	def __str__(self):
 		return self.name
