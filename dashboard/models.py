@@ -70,13 +70,19 @@ class Office(BaseModel):
 	def __str__(self):
 		return self.name
 
+class IncidenceFile(BaseModel):
+	path = models.CharField(max_length=300)
+
+	def __str__(self):
+		return self.path.split[-1] # return filename
+
 class IndicatorData(BaseModel):
 	load_date = models.DateField(max_length=50)
 	amount = models.DecimalField(max_digits=10, decimal_places=2)
 	indicator = models.ForeignKey(Indicator,on_delete=models.PROTECT)
 	indicator_type = models.ForeignKey(IndicatorType, on_delete=models.PROTECT);
+	attached_file = models.ForeignKey(IncidenceFile, on_delete=models.PROTECT);
 	office = models.ForeignKey(Office, on_delete=models.PROTECT)
-
 
 
 class Dashboard():
