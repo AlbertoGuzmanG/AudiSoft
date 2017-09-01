@@ -21,17 +21,21 @@ app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', '$
 	scope.loading = { offices : false, regions : false, categories : false};
 	scope.office_modal = [{ name : 'Préstamos', percent : 50}, { name : 'Tárjetas', percent : 50}]
 
-	var getOffices = () => http.get('/api/offices');
-	var getOfficesRisk = () => http.get('/dashboard/api/offices_risk/' + scope.settings.indicator_type).finally(() => loading.hide.all());
 
 	scope.$on('indicator_type_change', function(event, indicator_type) {
 		scope.settings.indicator_type = (indicator_type) ? 1 : 2;
 		updateData();
 	});
 
-	var getCategoriesFromOffice = (office) => $.map(office.categories, function(value, index) { return [value];}); // office.categories object to array
+	// promises
+	var getOffices = () => http.get('/api/offices');
+	var getOfficesRisk = () => http.get('/dashboard/api/offices_risk/' + scope.settings.indicator_type).finally(() => loading.hide.all());
 
-	var processResponse = function (values) {
+	// extract data functions
+	var getCategoriesFromOffice = (office) => $.map(office.categories, function(value, index) { return [value];}); // office.categories object to array
+	var getRiskyOffices = (offices) => offices.filter((o) => o.risk > 0 );
+
+	function processResponse(values) {
 		scope.offices = values[0].data;
 		scope.office_risk = values[1].data;
 
@@ -40,12 +44,13 @@ app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', '$
 	}
 
 	function setCategoriesData(offices_risk) {
-		offices_risk = offices_risk.offices.filter((a) => a.risk > 0 );
+
+		offices_risk = getRiskyOffices(offices_risk.offices);
 		var category_sum = [];
 
 		offices_risk.forEach(office => {
 			var categories = getCategoriesFromOffice(office);
-			var total_incidences = 0;
+			var total_amount = 0;
 
 			categories.forEach((category) => {
 				var indicators = [];
@@ -54,16 +59,15 @@ app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', '$
 						indicators.push(indicator);
 					}
 				});
-				category.total_incidences = indicators.map(a => a.value).reduce((a,b) => a + b)
+				category.total_amount = indicators.map(a => a.value).reduce((a,b) => a + b)
 			});
-
 
 			categories.forEach(category => {
 				var category_index = category_sum.map(a => a.id).indexOf(category.id);
 				if (category_index == -1) {
 					category_sum.push(category);
 				} else {
-					category_sum[category_index].total_incidences += category.total_incidences;
+					category_sum[category_index].total_amount += category.total_amount;
 				}
 			});
 		});
@@ -72,19 +76,21 @@ app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', '$
 
 	function setOfficesRiskData(offices_risk) {
 
-		var office_risk = offices_risk.offices.filter((a) => a.risk > 0 );
+		var office_risk = getRiskyOffices(offices_risk.offices);
 		office_risk.forEach(office => {
-			office.total_incidences = totalizeIncidencesByOffice(office)
+			office.total_amount = totalizeIncidencesAmountByOffice(office)
 			office.risk_level = universal.getLevel(office.risk);
 		});
 		office_risk = office_risk.sort((a,b) => a.risk < b.risk).splice(0, 5);
 		return office_risk;
 	}
 
-	function totalizeIncidencesByOffice(office) {
+	function totalizeIncidencesAmountByOffice(office) {
+		// by office, get the total of an indicator,
+		// could be by either qty or amount depending on the settings
 
 		var categories =  getCategoriesFromOffice(office);
-		var total_incidences = 0;
+		var total_amount = 0;
 		var indicators = [];
 
 		categories.forEach((category) => {
@@ -95,8 +101,8 @@ app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', '$
 			});
 		});
 
-		var total_incidences = indicators.map(a => a.value).reduce((a,b) => a + b)
-		return total_incidences;
+		var total_amount = indicators.map(a => a.value).reduce((a,b) => a + b)
+		return total_amount;
 	}
 
 	function updateData() {
@@ -161,26 +167,26 @@ app.controller('dashboardController', ['$scope', '$http', '$rootScope', '$q', '$
 	      }
 	    }
 	});
-  
 
- new Chart(document.getElementById("doughnut-chart"), {
-    type: 'doughnut',
-    data: {
-      labels: ['METROPOLITANA NORTE', 'METROPOLITANA CENTRAL', 'METROPOLITANA OESTE', 'METROPOLITANA ORIENTAL', 'ZONA ESTE', 'ZONA SANTIAGO ESTE', 'ZONA SANTIAGO OESTE', 'ZONA NORCENTRAL', 'ZONA NORDESTE', 'ZONA NOROESTE', 'ZONA SURESTE', 'SUR'],
-      datasets: [
-        {
-          label: "Population (millions)",
-          backgroundColor: [transparentize("#3e95cd", .3), transparentize("#8e5ea2", .3),transparentize("#3cba9f", .3),transparentize("#e8c3b9", .3),transparentize("#c45850", .3),transparentize('#929AE0', .3), transparentize('#23BB6F', .3), transparentize('#050C3D', .3), transparentize('#DCB7E5', .3), transparentize('#60FEE7', .3), transparentize('#B033F7', .3), transparentize('#04140C', .3)],
-          data: [2289, 1904, 1720, 270, 790, 2795, 1620, 1729, 1176, 1739, 1228, 2273]
-        }
-      ]
-    },
-    options: {
-      title: { 	
-        display: false
-        // text: 'Predicted world population (millions) in 2050'
-      }
-    }
-});
+
+	 new Chart(document.getElementById("doughnut-chart"), {
+	    type: 'doughnut',
+	    data: {
+	      labels: ['METROPOLITANA NORTE', 'METROPOLITANA CENTRAL', 'METROPOLITANA OESTE', 'METROPOLITANA ORIENTAL', 'ZONA ESTE', 'ZONA SANTIAGO ESTE', 'ZONA SANTIAGO OESTE', 'ZONA NORCENTRAL', 'ZONA NORDESTE', 'ZONA NOROESTE', 'ZONA SURESTE', 'SUR'],
+	      datasets: [
+	        {
+	          label: "Population (millions)",
+	          backgroundColor: [transparentize("#3e95cd", .3), transparentize("#8e5ea2", .3),transparentize("#3cba9f", .3),transparentize("#e8c3b9", .3),transparentize("#c45850", .3),transparentize('#929AE0', .3), transparentize('#23BB6F', .3), transparentize('#050C3D', .3), transparentize('#DCB7E5', .3), transparentize('#60FEE7', .3), transparentize('#B033F7', .3), transparentize('#04140C', .3)],
+	          data: [2289, 1904, 1720, 270, 790, 2795, 1620, 1729, 1176, 1739, 1228, 2273]
+	        }
+	      ]
+	    },
+	    options: {
+	      title: {
+	        display: false
+	        // text: 'Predicted world population (millions) in 2050'
+	      }
+	    }
+	});
 
 }]);
