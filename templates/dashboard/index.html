@@ -105,7 +105,7 @@
                         <span class="collection-header">Oficinas con mayor cantidad de incidencias</span>
                         <p>Evaluación por categoría de indicadores</p>
                     </li>
-                    <li class="collection-item trigger-modal" ng-repeat='off in resume_box.offices'>
+                    <li class="collection-item trigger-modal" ng-repeat='off in offices_risk'>
                         <div class="row">
                             <div class="col s7 title">
                                 <p class="collections-title"><strong>[[off.code]] -</strong> [[off.name]]</p>
@@ -122,7 +122,7 @@
                         </div>
 
                     </li>
-                    <li class="collection-item" ng-show='resume_box.offices.length == 0'>
+                    <li class="collection-item" ng-show='offices_risk.length == 0'>
                         Sin información
                     </li>
                     <li class="collection-item" ng-show='loading.offices'>

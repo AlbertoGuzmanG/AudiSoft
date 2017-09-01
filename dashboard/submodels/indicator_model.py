@@ -18,7 +18,7 @@ class OfficeModel():
 	#Getting risk by indicator and office
 	def get_indicator_risk_by_office(self, indicators_data):
 		indicators_risk = {}
-		totals = self.sum_by_indicator(indicators_data)		
+		totals = self.sum_by_indicator(indicators_data)
 
 		for indicator in indicators_data:
 			ammount = indicator['amount']
@@ -33,11 +33,11 @@ class OfficeModel():
 					'value': ammount,
 					'percent': total_risk,
 					'indicator_id': indicator_id,
-					'office_id' : office_id 
+					'office_id' : office_id
 				}
 
 		return indicators_risk
 
 	def get_risk(self, total_executions, indicator_type, filter):
-		
+
 

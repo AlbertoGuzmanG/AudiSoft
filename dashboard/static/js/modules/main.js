@@ -83,7 +83,7 @@
 
 		var updateMap = function(indicator_type){
 			loading.show();
-			http.get('/dashboard/api/map_offices_risk/' + indicator_type, {})
+			http.get('/dashboard/api/offices_risk/' + indicator_type, {})
 			.then(function (res) {
 				load_map(res.data);
 				$('#popup').show();

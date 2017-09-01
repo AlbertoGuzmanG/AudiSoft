@@ -8,12 +8,7 @@ from .submodels.office_model import OfficeModel
 def dashboard(request):
 	return render(request,'dashboard/index.html')
 
-
-def offices_risk(request, indicator_type):
-	risk_information = OfficeModel().get_risk(indicator_type)
-	return JsonResponse(risk_information, safe=False)
-	
-def map_offices_risk(request, indicator_type = 1):
+def offices_risk(request, indicator_type = 1):
 	res_object = {}
 	risk_information = OfficeModel().get_risk(indicator_type)
 
@@ -48,12 +43,12 @@ def map_offices_risk(request, indicator_type = 1):
 		regions.append({
 		    "type": "Feature",
 		    "properties": {
-		      "id": region['id'],      
+		      "id": region['id'],
 		      "info": {
 		        "region_name": {"label": "Región","value": region['name']},
 		        "clients_count": {"label": "Clientes","value": " 340 "},
 		        "risk": {"label": "Riesgo","value": region['risk']
-		        }		        
+		        }
 		      }
 		    },
 		    "geometry": {
@@ -64,4 +59,7 @@ def map_offices_risk(request, indicator_type = 1):
 		    }
 		})
 
-	return JsonResponse({'offices': offices, 'regions': regions}, safe=False)
+	# append summarized office info
+	risky_offices = OfficeModel().risky_offices(risk_information['offices'])
+
+	return JsonResponse({'offices': offices, 'regions': regions, 'offices_risk' : risky_offices}, safe=False)

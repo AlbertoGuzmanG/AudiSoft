@@ -1,20 +1,21 @@
 # add/extend django features
 from django.http import HttpResponse
-import datetime
-import simplejson
+from datetime import datetime, time, date
+from simplejson import dumps as json_encode
+from numpy import int64
 from django.contrib.gis.geos.point import Point
 
 def default_json_encoder(o) :
-    if isinstance(o, datetime.datetime):
+    if isinstance(o, datetime):
         r = o.isoformat()
         if o.microsecond:
             r = r[:23] + r[26:]
         if r.endswith('+00:00'):
             r = r[:-6] + 'Z'
         return r
-    elif isinstance(o, datetime.date):
+    elif isinstance(o, date):
         return o.isoformat()
-    elif isinstance(o, datetime.time):
+    elif isinstance(o, time):
         if is_aware(o):
             raise ValueError("JSON can't represent timezone-aware times.")
         r = o.isoformat()
@@ -23,6 +24,8 @@ def default_json_encoder(o) :
         return r
     elif isinstance(o, Point):
         return o.coords
+    elif isinstance(o, int64):
+        return int(o)
     else:
         raise TypeError(repr(o) + ' is not JSON serializable')
 
@@ -32,5 +35,5 @@ class JsonResponse(HttpResponse):
             raise TypeError('In order to allow non-dict objects to be '
                 'serialized set the safe parameter to False')
         kwargs.setdefault('content_type', 'application/json')
-        data = simplejson.dumps(data, default=default_json_encoder)
+        data = json_encode(data, default=default_json_encoder)
         super(JsonResponse, self).__init__(content=data, **kwargs)

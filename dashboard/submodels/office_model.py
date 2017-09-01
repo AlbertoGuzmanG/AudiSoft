@@ -1,7 +1,9 @@
 # from django.db import models
 from dashboard.models import Office, IndicatorCategory, Dashboard
 from dashboard.sql_view_manager import ViewManager
+from functools import reduce
 from pprint import pprint
+from pandas import DataFrame
 
 class OfficeModel():
 	indicator_type = 0
@@ -30,7 +32,7 @@ class OfficeModel():
 			#Getting indicator/office risk
 			indicators_risk[key] = {
 				'value': ammount,
-				'percent': (ammount / totals[indicator_id]) * 100,
+				'percent':  float("%.1f" % ((ammount / totals[indicator_id]) * 100)),
 				'indicator_id': indicator_id,
 				'office_id' : office_id
 			}
@@ -38,13 +40,77 @@ class OfficeModel():
 		return indicators_risk
 
 
+	def total_amount_by_office(self, office):
+		total_amount = 0;
+		indicators = [];
+
+		if len(list(office['categories'].keys())) == 0: # if not exceptions in office...
+			return 0
+
+		for category in office['categories']:
+			for indicator in office['categories'][category]['indicators']:
+				# no repeat indicator on count
+				if not indicator['indicator_id'] in list(map(lambda i: i['indicator_id'], indicators)):
+					indicators.append(indicator);
+
+		# totalize indicator 'value'
+		# first, map for getting an array of 'value' field and
+		# then reduce the array
+		total_amount = reduce(lambda t, b: t + b, [x for x in map(lambda i: i['value'] , indicators)])
+		return total_amount
+
+	def risky_offices(self, office_list):
+
+		# offices with level of risk
+		risky_offices = list(filter(lambda o: o['total_amount'] > 0, office_list))
+
+		# dataframe (pandas) of offices
+		risky_offices_df = DataFrame(risky_offices)
+		# order by total amount/qty of exceptions and get first row (highest office)
+		highest_office = dict(risky_offices_df.sort_values('risk', ascending=False).iloc[0])
+		# remove unused office info
+		highest_office.pop('categories')
+
+		# highest indicator count
+		array_indicators = []
+		array_categories = []
+		for office in risky_offices:
+			categories = list(office['categories'].values())
+			for category in categories:
+				array_categories.append(category)
+				[array_indicators.append(x) for x in category['indicators']]
+
+
+		# dataframe of categories
+		categories_df = DataFrame(array_categories)
+		# order by total amount/qty of exceptions and get first row (highest category)
+		highest_category = dict(categories_df.sort_values('weight_risk', ascending=False).iloc[0])
+		# remove unused category info
+		highest_category.pop('indicators')
+
+
+		# dataframe of indicators
+		indicators_df = DataFrame(array_indicators)
+		# order by total amount/qty of exceptions and get first row (highest indicator)
+		highest_indicator = dict(indicators_df.sort_values('value', ascending=False).iloc[0])
+
+		return {
+			'offices' : risky_offices,
+			'summary' : {
+				'office' : highest_office,
+				'category' : highest_category,
+				'indicator' : highest_indicator
+			}
+		}
+
 	def get_risk(self, indicator_type):
+		''' get all regions and offices info  '''
 		regions = {}
 		office_list = []
 		executions_count = 3 #TODO get this value from config
 
 		self.indicator_type = indicator_type
-		#Getting category indicatos by indicator type
+		#Getting category indicator by indicator type
 		category_indicators = IndicatorCategory.objects.all().filter(indicator_type_id = self.indicator_type)
 		#Getting indicators data from las N executions
 		offices_information = ViewManager().get_tree_risk(executions_count, {'indicator_type' : self.indicator_type})
@@ -82,11 +148,11 @@ class OfficeModel():
 				#Getting category weight by indicator type
 				category_weight = (category_indicator.category.categoryweight_set.filter(indicator_type_id = self.indicator_type).values()[0])['weight']
 				#Calculating category indicator risk
-				category_indicator_risk = (indicator_risk['percent'] / 100) *  category_indicator.weight
+				category_indicator_risk =  float("%.2f" % ((indicator_risk['percent'] / 100) *  category_indicator.weight))
 				#Calculating weight risk for indicators
 				indicator_risk['weight_risk'] = category_indicator_risk
 				#Calculating weight risk for categories
-				weight_risk = (category_indicator_risk / 100) * category_weight
+				weight_risk =  float("%.2f" % ((category_indicator_risk / 100) * category_weight))
 
 				#Adding category indicator risk
 				if category_id in categories_risk:
@@ -107,6 +173,7 @@ class OfficeModel():
 
 			office_object['categories'] = categories_risk
 			office_object['risk'] = sum_indicator_risk
+			office_object['total_amount'] = self.total_amount_by_office(office_object)
 
 			office_list.append(office_object.copy())
 
@@ -120,4 +187,4 @@ class OfficeModel():
 					'risk': office_object['risk']
 				}
 
-		return  {'offices': office_list, 'regions': regions}
+		return  {'offices': office_list, 'regions': regions }
