@@ -8,6 +8,9 @@ from .submodels.office_model import OfficeModel
 def dashboard(request):
 	return render(request,'dashboard/index.html')
 
+def login(request):
+	return render(request,'authentication/index.html')
+
 def offices_risk(request, indicator_type = 1):
 	res_object = {}
 	risk_information = OfficeModel().get_risk(indicator_type)
@@ -59,7 +62,7 @@ def offices_risk(request, indicator_type = 1):
 		    }
 		})
 
-	# append summarized office info
+	# resumed info about offices risk
 	risky_offices = OfficeModel().risky_offices(risk_information['offices'])
 
 	return JsonResponse({'offices': offices, 'regions': regions, 'offices_risk' : risky_offices}, safe=False)

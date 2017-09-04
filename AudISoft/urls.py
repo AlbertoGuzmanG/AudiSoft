@@ -20,6 +20,7 @@ from dashboard.urls import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^auth/login', views.login),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^api/', include('api.urls')),
 ]
