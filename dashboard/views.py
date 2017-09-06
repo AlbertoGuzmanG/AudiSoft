@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from AudISoft.extension import JsonResponse
 from .models import Dashboard
 from .submodels.office_model import OfficeModel
+import json
+
 # Create your views here.
 
 def dashboard(request):
@@ -15,13 +17,12 @@ def offices_risk(request, indicator_type = 1):
 	offices = []
 	regions = []
 	for office in risk_information['offices']:
+		location = office['location'].split(',')
 		offices.append({
 			"type":"Feature",
 			"properties":{
-				# "Y":office['location'][0],
-				# "X":office['location'][1],
-				"Y":office['location'],
-				"X":'#f00',
+				"Y": float(location[0]),
+				"X":float(location[1]),
 				"region":office['region'],
 				'risk': office['risk'],
 				"info":{
@@ -36,13 +37,13 @@ def offices_risk(request, indicator_type = 1):
 			},
 			"geometry":{
 				"type":"Point",
-				#"coordinates":[office['location'][1], office['location'][0]]
-				"coordinates":['#f00', '#f00']
+				"coordinates":[float(location[1]), float(location[0])]
 			}
 		})
 
 	for index in risk_information['regions']:
 		region = risk_information['regions'][index]
+		
 		regions.append({
 		    "type": "Feature",
 		    "properties": {
@@ -57,7 +58,7 @@ def offices_risk(request, indicator_type = 1):
 		    "geometry": {
 		      "type": "Polygon",
 		      "coordinates": [
-		          region['location']
+		          json.loads(region['location']) if region['location'] != None else []
 		      ]
 		    }
 		})
