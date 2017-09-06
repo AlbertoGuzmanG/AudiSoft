@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from datetime import datetime, time, date
 from simplejson import dumps as json_encode
 from numpy import int64
-from django.contrib.gis.geos.point import Point
 
 def default_json_encoder(o) :
     if isinstance(o, datetime):
@@ -22,8 +21,6 @@ def default_json_encoder(o) :
         if o.microsecond:
             r = r[:12]
         return r
-    elif isinstance(o, Point):
-        return o.coords
     elif isinstance(o, int64):
         return int(o)
     else:

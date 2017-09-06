@@ -18,8 +18,10 @@ def offices_risk(request, indicator_type = 1):
 		offices.append({
 			"type":"Feature",
 			"properties":{
-				"Y":office['location'][0],
-				"X":office['location'][1],
+				# "Y":office['location'][0],
+				# "X":office['location'][1],
+				"Y":office['location'],
+				"X":'#f00',
 				"region":office['region'],
 				'risk': office['risk'],
 				"info":{
@@ -34,7 +36,8 @@ def offices_risk(request, indicator_type = 1):
 			},
 			"geometry":{
 				"type":"Point",
-				"coordinates":[office['location'][1], office['location'][0]]
+				#"coordinates":[office['location'][1], office['location'][0]]
+				"coordinates":['#f00', '#f00']
 			}
 		})
 

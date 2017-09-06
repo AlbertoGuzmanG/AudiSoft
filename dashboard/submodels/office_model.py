@@ -63,7 +63,7 @@ class OfficeModel():
 
 		# offices with level of risk
 		risky_offices = list(filter(lambda o: o['total_amount'] > 0, office_list))
-
+		pprint(risky_offices)
 		# dataframe (pandas) of offices
 		risky_offices_df = DataFrame(risky_offices)
 		# order by total amount/qty of exceptions and get first row (highest office)
@@ -183,7 +183,7 @@ class OfficeModel():
 				regions[office.region_id] = {
 					'id': office.region_id,
 					'name': office.region.name,
-					'location': office.region.area[0].coords if office.region.area else '',
+					'location': office.region.area,
 					'risk': office_object['risk']
 				}
 
