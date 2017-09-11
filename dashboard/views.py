@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth import authenticate
 from AudISoft.extension import JsonResponse
 from .models import Dashboard
 from .submodels.office_model import OfficeModel
@@ -8,8 +9,19 @@ from .submodels.office_model import OfficeModel
 def dashboard(request):
 	return render(request,'dashboard/index.html')
 
+
 def login(request):
-	return render(request,'authentication/index.html')
+	context = {}
+	if request.method == 'POST':
+		form = request.POST
+
+		user = authenticate(username=form['username'], password=form['password'])
+		if user is None:
+			context['bad_login'] = True
+		else:
+			return redirect('dashboard')
+
+	return render(request,'authentication/index.html', context)
 
 def offices_risk(request, indicator_type = 1):
 	res_object = {}

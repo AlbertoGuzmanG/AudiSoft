@@ -1,7 +1,11 @@
-7# from django.db import models
+# from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 from django.contrib.gis.db import models
 from django.db import connections
+from django.db import connections
+from django.shortcuts import get_object_or_404
+from ldap3 import Server, Connection
 
 # Create your models here.
 class BaseModel(models.Model):
@@ -105,3 +109,29 @@ class Dashboard():
 	@staticmethod
 	def get_sql_data(sql):
 		return Dashboard.dictfetchall(sql)
+
+class AuthenticationBackend():
+	'''Define custom authentication validating user with active directory'''
+
+	def validate_ldap(self, username, password):
+		'''Try to establish a connection with ldap '''
+		try:
+			server = Server('ldap://reservas.BRRD.com')
+			connection = Connection(server, user='brrd\%s' % username , password=password)
+			connection.open()
+			return connection.bind()
+		except Exception:
+			raise('El servicio de ldap puede no estar funcionando adecuadamente.')
+
+	def authenticate(self, request, username=None, password=None):
+		if self.validate_ldap(username, password):
+			user = get_object_or_404(User, username=username)
+			return user
+		else:
+			return None
+
+	def get_user(self, user_id):
+		try:
+			return User.objects.get(pk=user_id)
+		except User.DoesNotExist:
+			return None

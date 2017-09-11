@@ -29,6 +29,7 @@
 
     <!-- CORE CSS-->
 
+    <link href="/static/js/jquery-ui/jquery-ui.min.css" type="text/css" rel="stylesheet">
     <link href="/static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="/static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
     <!-- Custome CSS-->
@@ -64,7 +65,8 @@
 
     <div id="login-page" class="row">
         <div class="col s12 z-depth-4 card-panel">
-            <form class="login-form">
+            <form class="login-form" method="post">
+             {% csrf_token %}
                 <div class="row">
                     <div class="input-field col s12 center">
                         <img src="/static/images/logo.jpg" alt="" class="circle responsive-img valign profile-image-login">
@@ -74,20 +76,20 @@
                 <div class="row margin">
                     <div class="input-field col s12">
                         <i class="mdi-social-person-outline prefix"></i>
-                        <input id="username" type="text" autofocus>
+                        <input id="username" name='username' type="text" autofocus>
                         <label for="username" class="center-align">Username</label>
                     </div>
                 </div>
                 <div class="row margin">
                     <div class="input-field col s12">
                         <i class="mdi-action-lock-outline prefix"></i>
-                        <input id="password" type="password">
+                        <input id="password" name='password' type="password">
                         <label for="password">Password</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <a href="index.html" class="btn waves-effect waves-light teal lighten-1 col s12">Login</a>
+                        <button class="btn waves-effect waves-light teal lighten-1 col s12">Login</button>
                     </div>
                 </div>
             </form>
@@ -102,6 +104,8 @@
 
     <!-- jQuery Library -->
     <script type="text/javascript" src="/static/js/jquery-1.11.2.min.js"></script>
+    <!-- jQueryUI Library -->
+    <script type="text/javascript" src="/static/js/jquery-ui/jquery-ui.min.js"></script>
     <!--materialize js-->
     <script type="text/javascript" src="/static/js/materialize.js"></script>
     <!--prism-->
@@ -109,8 +113,25 @@
     <!--scrollbar-->
     <script type="text/javascript" src="/static/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
-    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-    <script type="text/javascript" src="/static/js/plugins.js"></script>
+    <script type="text/javascript">
+
+        $(document).on('ready', removeLoading);
+        {% if bad_login %}
+            $(document).on('ready', badLogin);
+        {% endif %}
+
+
+        function removeLoading() {
+              $('body').addClass('loaded');
+        }
+
+        function badLogin() {
+            setTimeout(function () {
+                $('.card-panel').effect('shake', { times : 2});
+                Materialize.toast('<span>Las credecenciales son erroneas</span>', 2500);
+            }, 500);
+        }
+    </script>
 
 </body>
 
