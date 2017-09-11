@@ -1,7 +1,6 @@
 # from django.db import models
 from dashboard.models import Office, IndicatorCategory, Dashboard
 from dashboard.sql_view_manager import ViewManager
-from pprint import pprint
 
 class OfficeModel():
 

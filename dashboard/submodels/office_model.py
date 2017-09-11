@@ -2,7 +2,6 @@
 from dashboard.models import Office, IndicatorCategory, Dashboard
 from dashboard.sql_view_manager import ViewManager
 from functools import reduce
-from pprint import pprint
 from pandas import DataFrame
 
 class OfficeModel():
@@ -32,7 +31,7 @@ class OfficeModel():
 			#Getting indicator/office risk
 			indicators_risk[key] = {
 				'value': ammount,
-				'percent':  float("%.1f" % ((ammount / totals[indicator_id]) * 100)),
+				'percent':  (ammount / totals[indicator_id]) * 100,
 				'indicator_id': indicator_id,
 				'office_id' : office_id
 			}
@@ -96,6 +95,7 @@ class OfficeModel():
 
 		return {
 			'offices' : risky_offices,
+			'categories' : {},
 			'summary' : {
 				'office' : highest_office,
 				'category' : highest_category,
@@ -148,11 +148,11 @@ class OfficeModel():
 				#Getting category weight by indicator type
 				category_weight = (category_indicator.category.categoryweight_set.filter(indicator_type_id = self.indicator_type).values()[0])['weight']
 				#Calculating category indicator risk
-				category_indicator_risk =  float("%.2f" % ((indicator_risk['percent'] / 100) *  category_indicator.weight))
+				category_indicator_risk =  (indicator_risk['percent'] / 100) *  category_indicator.weight
 				#Calculating weight risk for indicators
 				indicator_risk['weight_risk'] = category_indicator_risk
 				#Calculating weight risk for categories
-				weight_risk =  float("%.2f" % ((category_indicator_risk / 100) * category_weight))
+				weight_risk =  (category_indicator_risk / 100) * category_weight
 
 				#Adding category indicator risk
 				if category_id in categories_risk:
