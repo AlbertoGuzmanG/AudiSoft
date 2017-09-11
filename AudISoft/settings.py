@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'AudISoft.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.mysql',
+        'ENGINE': 'django.db.backends.mysql',
         'HOST': 'localhost',
         'USER' : 'root',
         'NAME' : 'audisoft'

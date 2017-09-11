@@ -1,9 +1,6 @@
-# from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
-from django.contrib.gis.db import models
-from django.db import connections
-from django.db import connections
+from django.db import models, connections
 from django.shortcuts import get_object_or_404
 from ldap3 import Server, Connection
 
@@ -43,7 +40,7 @@ class Indicator(BaseModel):
 class Region(BaseModel):
 	name = models.CharField(max_length=50)
 	map_id = models.CharField(max_length=20)
-	area = models.PolygonField(null=True)
+	area = models.TextField(max_length=400000)
 
 	def __str__(self):
 		return self.name
@@ -66,7 +63,7 @@ class Office(BaseModel):
 	code = models.CharField(max_length=50)
 	name = models.CharField(max_length=50)
 	address = models.CharField(max_length=50)
-	location = models.PointField(null=True)
+	location = models.CharField(max_length=500)
 	region = models.ForeignKey(Region, on_delete=models.PROTECT)
 	schedule = models.CharField(max_length=500)
 	office_type = models.CharField(max_length=4)

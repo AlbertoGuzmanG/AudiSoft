@@ -147,6 +147,7 @@ class OfficeModel():
 
 				#Getting category weight by indicator type
 				category_weight = (category_indicator.category.categoryweight_set.filter(indicator_type_id = self.indicator_type).values()[0])['weight']
+
 				#Calculating category indicator risk
 				category_indicator_risk =  (indicator_risk['percent'] / 100) *  category_indicator.weight
 				#Calculating weight risk for indicators
@@ -183,8 +184,9 @@ class OfficeModel():
 				regions[office.region_id] = {
 					'id': office.region_id,
 					'name': office.region.name,
-					'location': office.region.area[0].coords if office.region.area else '',
+					'location': office.region.area,
 					'risk': office_object['risk']
 				}
+
 
 		return  {'offices': office_list, 'regions': regions }

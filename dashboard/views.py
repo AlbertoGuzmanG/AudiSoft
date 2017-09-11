@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate
 from AudISoft.extension import JsonResponse
 from .models import Dashboard
 from .submodels.office_model import OfficeModel
+import json
+
 # Create your views here.
 
 def dashboard(request):
@@ -14,7 +16,6 @@ def login(request):
 	context = {}
 	if request.method == 'POST':
 		form = request.POST
-
 		user = authenticate(username=form['username'], password=form['password'])
 		if user is None:
 			context['bad_login'] = True
@@ -30,11 +31,12 @@ def offices_risk(request, indicator_type = 1):
 	offices = []
 	regions = []
 	for office in risk_information['offices']:
+		location = office['location'].split(',')
 		offices.append({
 			"type":"Feature",
 			"properties":{
-				"Y":office['location'][0],
-				"X":office['location'][1],
+				"Y": float(location[0]),
+				"X":float(location[1]),
 				"region":office['region'],
 				'risk': office['risk'],
 				"info":{
@@ -49,7 +51,7 @@ def offices_risk(request, indicator_type = 1):
 			},
 			"geometry":{
 				"type":"Point",
-				"coordinates":[office['location'][1], office['location'][0]]
+				"coordinates":[float(location[1]), float(location[0])]
 			}
 		})
 
@@ -69,12 +71,12 @@ def offices_risk(request, indicator_type = 1):
 		    "geometry": {
 		      "type": "Polygon",
 		      "coordinates": [
-		          region['location']
+		          json.loads(region['location']) if region['location'] != None else []
 		      ]
 		    }
 		})
 
-	# resumed info about offices risk
+	# append summarized office info
 	risky_offices = OfficeModel().risky_offices(risk_information['offices'])
 
 	return JsonResponse({'offices': offices, 'regions': regions, 'offices_risk' : risky_offices}, safe=False)
