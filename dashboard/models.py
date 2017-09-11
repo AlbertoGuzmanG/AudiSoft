@@ -118,7 +118,7 @@ class AuthenticationBackend():
 			connection.open()
 			return connection.bind()
 		except Exception:
-			raise('El servicio de ldap puede no estar funcionando adecuadamente.')
+			raise Exception('El servicio de ldap puede no estar funcionando adecuadamente.')
 
 	def authenticate(self, request, username=None, password=None):
 		if self.validate_ldap(username, password):

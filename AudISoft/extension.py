@@ -1,5 +1,6 @@
 # add/extend django features
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from datetime import datetime, time, date
 from simplejson import dumps as json_encode
 from numpy import int64
@@ -34,3 +35,12 @@ class JsonResponse(HttpResponse):
         kwargs.setdefault('content_type', 'application/json')
         data = json_encode(data, default=default_json_encoder)
         super(JsonResponse, self).__init__(content=data, **kwargs)
+
+
+def mainpage_if_logged(func):
+    def func_wrapper(request):
+        if request.user.is_authenticated:
+            return redirect('dashboard')
+        else:
+            return func(request)
+    return func_wrapper

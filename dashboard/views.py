@@ -1,25 +1,30 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate
-from AudISoft.extension import JsonResponse
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from AudISoft.extension import JsonResponse, mainpage_if_logged
 from .models import Dashboard
 from .submodels.office_model import OfficeModel
-import json
+from json import loads as json_decode
 
 # Create your views here.
 
+@login_required
 def dashboard(request):
 	return render(request,'dashboard/index.html')
 
-
-def login(request):
+@mainpage_if_logged
+def auth_login(request):
 	context = {}
 	if request.method == 'POST':
+		# get form data
 		form = request.POST
+		# validate if user credentials are ok
 		user = authenticate(username=form['username'], password=form['password'])
 		if user is None:
 			context['bad_login'] = True
 		else:
+			login(request, user)
 			return redirect('dashboard')
 
 	return render(request,'authentication/index.html', context)
@@ -71,7 +76,7 @@ def offices_risk(request, indicator_type = 1):
 		    "geometry": {
 		      "type": "Polygon",
 		      "coordinates": [
-		          json.loads(region['location']) if region['location'] != None else []
+		          json_decode(region['location']) if region['location'] != None else []
 		      ]
 		    }
 		})

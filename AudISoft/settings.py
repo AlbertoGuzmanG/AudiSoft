@@ -131,3 +131,11 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 AUTHENTICATION_BACKENDS = ('dashboard.models.AuthenticationBackend', )
+
+# Redirect after login
+LOGIN_REDIRECT_URL = '/dashboard'
+LOGIN_URL = '/auth/login'
+
+
+
+
