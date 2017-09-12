@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from AudISoft.extension import JsonResponse, mainpage_if_logged
 from .models import Dashboard
@@ -12,6 +12,10 @@ from json import loads as json_decode
 @login_required
 def dashboard(request):
 	return render(request,'dashboard/index.html')
+
+def auth_logout(request):
+	logout(request)
+	return redirect('/login')
 
 @mainpage_if_logged
 def auth_login(request):
