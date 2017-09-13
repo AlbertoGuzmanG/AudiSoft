@@ -63,6 +63,9 @@ class OfficeModel():
 		# offices with level of risk
 		risky_offices = list(filter(lambda o: o['total_amount'] > 0, office_list))
 
+		if len(risky_offices) == 0:
+			return {}
+
 		# dataframe (pandas) of offices
 		risky_offices_df = DataFrame(risky_offices)
 		# order by total amount/qty of exceptions and get first row (highest office)
@@ -82,11 +85,14 @@ class OfficeModel():
 
 		# dataframe of categories
 		categories_df = DataFrame(array_categories)
-		# order by total amount/qty of exceptions and get first row (highest category)
+		# order by total amount/qty of exceptions
+		# top_categories = categories_df.sort_values('weight_risk', ascending=False)
+
+
+		# get first row (highest category)
 		highest_category = dict(categories_df.sort_values('weight_risk', ascending=False).iloc[0])
 		# remove unused category info
 		highest_category.pop('indicators')
-
 
 		# dataframe of indicators
 		indicators_df = DataFrame(array_indicators)
