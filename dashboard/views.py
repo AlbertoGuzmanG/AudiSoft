@@ -9,29 +9,8 @@ from json import loads as json_decode
 
 # Create your views here.
 
-@login_required
 def dashboard(request):
 	return render(request,'dashboard/index.html')
-
-def auth_logout(request):
-	logout(request)
-	return redirect('/login')
-
-@mainpage_if_logged
-def auth_login(request):
-	context = {}
-	if request.method == 'POST':
-		# get form data
-		form = request.POST
-		# validate if user credentials are ok
-		user = authenticate(username=form['username'], password=form['password'])
-		if user is None:
-			context['bad_login'] = True
-		else:
-			login(request, user)
-			return redirect('dashboard')
-
-	return render(request,'authentication/index.html', context)
 
 def offices_risk(request, indicator_type = 1):
 	res_object = {}

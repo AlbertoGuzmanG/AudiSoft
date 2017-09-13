@@ -25,7 +25,7 @@ SECRET_KEY = 'w%gaqk!m*2l18%w2s1ef+v=8vpm@xzl_o$pkk^y(3dz2hf2yqo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['WAUD-CONTINUA01', 'localhost', 'WAUD-DAC-009']
+ALLOWED_HOSTS = ['WAUD-CONTINUA01', 'localhost', '127.0.0.1',  'WAUD-DAC-009']
 
 
 # Application definition
@@ -85,8 +85,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'localhost',
-        'USER' : 'root',
-        'NAME' : 'audisoft'
+        'USER' : '',
+        'NAME' : ''
     }
 }
 
@@ -129,10 +129,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
-AUTHENTICATION_BACKENDS = ('dashboard.models.AuthenticationBackend', )
-
-# Redirect after login
-LOGIN_REDIRECT_URL = '/dashboard'
-LOGIN_URL = '/login'
-
