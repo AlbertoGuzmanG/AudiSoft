@@ -134,8 +134,5 @@ AUTHENTICATION_BACKENDS = ('dashboard.models.AuthenticationBackend', )
 
 # Redirect after login
 LOGIN_REDIRECT_URL = '/dashboard'
-LOGIN_URL = '/auth/login'
-
-
-
+LOGIN_URL = '/login'
 
