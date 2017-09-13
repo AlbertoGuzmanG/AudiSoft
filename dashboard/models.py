@@ -79,7 +79,7 @@ class IncidenceFile(BaseModel):
 
 class IndicatorData(BaseModel):
 	load_date = models.DateField(max_length=50)
-	amount = models.DecimalField(max_digits=10, decimal_places=2)
+	amount = models.DecimalField(max_digits=15, decimal_places=2)
 	indicator = models.ForeignKey(Indicator,on_delete=models.PROTECT)
 	indicator_type = models.ForeignKey(IndicatorType, on_delete=models.PROTECT);
 	attached_file = models.ForeignKey(IncidenceFile, on_delete=models.PROTECT);
